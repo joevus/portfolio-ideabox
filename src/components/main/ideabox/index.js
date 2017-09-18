@@ -13,10 +13,9 @@ class IdeaboxContainer extends React.Component {
   handleMouseDown = (e) => {
     this.isMouseDown = true;
     console.log(e.clientX, e.clientY);
-    var ctx = this.props.context;
-    console.log(ctx);
-    ctx.fillStyle = 'red';
-    ctx.fillRect(20,20,90,90);
+    this.ctx = this.props.context;
+    console.log(this.ctx);
+    this.ctx.fillStyle = 'red';
   }
 
   handleMouseUp = (e) => {
@@ -25,7 +24,13 @@ class IdeaboxContainer extends React.Component {
 
 // track x, y coordinates where mouse moves if isMouseDown is true. Then use those coordinates to draw lines.
   handleMouseMove = (e) => {
-    console.log(e.clientX, e.clientY);
+    if(this.isMouseDown) {
+      var X = e.pageX - e.target.offsetLeft;
+      var Y = e.pageY - e.target.offsetTop;
+      this.ctx.fillRect(X, Y, 10, 10);
+      console.log(e.clientX, e.clientY);
+
+    }
   }
 
   render() {
