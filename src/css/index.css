@@ -1,0 +1,53 @@
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+html {
+  box-sizing: border-box;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: #eee;
+}
+
+.brand {
+  /* take up the rest of remaining space */
+  flex: 1;
+}
+
+.navbar div {
+  padding: 20px;
+}
+
+/* for mobile */
+@media(max-width: 650px) {
+  .navbar {
+    flex-wrap: wrap;
+  }
+  .brand {
+    width: 100%;
+    margin: 15px 0 10px 15px;
+
+  }
+  .navLink {
+    width: 100%;
+    margin-left: 15px;
+  }
+  .navbar div {
+    padding: 10px;
+  }
+}
+
+/*Idea Box*/
+#ideaCanv {
+  background-color: #bbb;
+}
+.simpleCntr {
+  display: flex;
+  justify-content: center;
+}
+.ideaBoxHd {
+  text-align: center;
+}
