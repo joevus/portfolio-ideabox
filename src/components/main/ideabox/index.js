@@ -12,24 +12,35 @@ class IdeaboxContainer extends React.Component {
 
   handleMouseDown = (e) => {
     this.isMouseDown = true;
-    console.log(e.clientX, e.clientY);
     this.ctx = this.props.context;
-    console.log(this.ctx);
-    this.ctx.fillStyle = 'red';
+    // set color to default
+    this.ctx.fillStyle = "black";
+    this.drawArr = [];
+    console.log("mousedown");
   }
 
   handleMouseUp = (e) => {
     this.isMouseDown = false;
+    this.pizzazzIt();
   }
 
-// track x, y coordinates where mouse moves if isMouseDown is true. Then use those coordinates to draw lines.
+// When button down and mouse moving moves, draw small rectangles at cursor
+// location.
   handleMouseMove = (e) => {
     if(this.isMouseDown) {
       var X = e.pageX - e.target.offsetLeft;
       var Y = e.pageY - e.target.offsetTop;
-      this.ctx.fillRect(X, Y, 10, 10);
-      console.log(e.clientX, e.clientY);
+      this.ctx.fillRect(X, Y, 12, 12);
+      this.drawArr.push([X,Y]);
+    }
+  }
 
+  pizzazzIt = () => {
+    this.ctx.fillStyle = "#FF0000";
+    for(let i = 0; i < this.drawArr.length; i++) {
+      let secs = 3000 / (1 + i * 10);
+      setTimeout(()=>{this.ctx.fillRect(this.drawArr[i][0], this.drawArr[i][1], 12, 12), secs})
+      //this.ctx.fillRect(this.drawArr[i][0], this.drawArr[i][1], 12, 12);
     }
   }
 
