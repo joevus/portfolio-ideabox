@@ -68,25 +68,27 @@ class IdeaboxContainer extends React.Component {
 
     let drawEffects = () => {
       // drawing speed increases until slowMark, then it slows
-      let slowMark = 3000 / (1 + this.drawArr.length * 0.9 * 2);
+      let slowMark = 1000 / (1 + this.drawArr.length * 0.8 * 5);
+      let secs = 500;
       for(let i = 0; i < this.drawArr.length; i++) {
-        let secs = 3000 / (1 + i * 2);
-        if(i / this.drawArr.length > .9) {
-          // when i is 90% of this.drawArr.length, (i / (this.drawArr.length * .9))
-          // is roughly 1. It gradually increases as i gets bigger. In the end close
-          // 10% of the 6000 gets added to slowMark.
-          secs = slowMark + (i / (this.drawArr.length * .9)) * 3000 - 3000;
+        if(i / this.drawArr.length < .8){
+          secs += 800 / (1 + i * 10);
+        } else {
+
+          // when i is 80% of this.drawArr.length, (i / (this.drawArr.length * .9))
+          // is roughly 1. It gradually increases as i gets bigger. In the end maybe close
+          // 20% of the 500 gets added to slowMark.
+          secs += slowMark + (i / (this.drawArr.length * .8)) * 100 - 100;
         }
 
         // refill drawing with new color
-        setTimeout(()=>{this.ctx.fillRect(this.drawArr[i][0], this.drawArr[i][1], 10, 10)}, 1000)
+        setTimeout(()=>{this.ctx.fillRect(this.drawArr[i][0], this.drawArr[i][1], 10, 10)}, secs)
       }
     }
 
-    // delay start of drawRefill
-    setTimeout(drawEffects, 500);
+    drawEffects();
 
-  }
+  } // end pizzazzIt
 
   render() {
     return (
