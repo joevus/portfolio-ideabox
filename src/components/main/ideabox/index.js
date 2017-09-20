@@ -46,13 +46,25 @@ class IdeaboxContainer extends React.Component {
     this.ctx.fillStyle = "#a67c00";
 
 
-    let recolor = (i) => {
+    let strokeColor = (i) => {
 
       this.ctx.beginPath();
       //this.ctx.fillRect(this.drawArr[i][0], this.drawArr[i][1], 10, 10)
       this.ctx.arc(this.drawArr[i][0], this.drawArr[i][1], 10, 0, Math.PI * 2);
       this.ctx.strokeStyle = "#ffbf00";
+      this.ctx.lineWidth = 5;
       this.ctx.stroke();
+      // this.ctx.fillStyle = "#a67c00";
+      // this.ctx.fill();
+    }
+
+    let fillColor = (i) => {
+
+      this.ctx.beginPath();
+      //this.ctx.fillRect(this.drawArr[i][0], this.drawArr[i][1], 10, 10)
+      this.ctx.arc(this.drawArr[i][0], this.drawArr[i][1], 10, 0, Math.PI * 2);
+      // this.ctx.strokeStyle = "#ffbf00";
+      // this.ctx.stroke();
       this.ctx.fillStyle = "#a67c00";
       this.ctx.fill();
     }
@@ -137,7 +149,7 @@ class IdeaboxContainer extends React.Component {
       let secs = 0;
       for(let i = 0; i < this.drawArr.length; i++) {
         if(i / this.drawArr.length < .8){
-          secs += 800 / (1 + i * 10);
+          secs += 500 / (1 + i * 10);
         } else {
 
           // when i is 80% of this.drawArr.length, (i / (this.drawArr.length * .9))
@@ -146,10 +158,11 @@ class IdeaboxContainer extends React.Component {
           secs += slowMark + (i / (this.drawArr.length * .8)) * 100 - 100;
         }
 
+        setTimeout(()=> {strokeColor(i)}, secs/1.5);
         // refill drawing with new color
         setTimeout(()=>{
           //this.ctx.fillRect(this.drawArr[i][0], this.drawArr[i][1], 10, 10)
-          recolor(i);
+          fillColor(i);
           // drawFringe(i);
         }, secs)
       }
