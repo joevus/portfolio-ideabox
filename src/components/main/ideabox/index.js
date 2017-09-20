@@ -44,6 +44,7 @@ class IdeaboxContainer extends React.Component {
     }
 
     let drawFringe = (i) => {
+      this.ctx.strokeStyle = "#D4AF37";
       if(i > 0 && i % 10 === 0){
         let x = this.drawArr[i - 5][0];
         let y = this.drawArr[i - 5][1];
@@ -111,7 +112,7 @@ class IdeaboxContainer extends React.Component {
     let drawEffects = () => {
       // drawing speed increases until slowMark, then it slows
       let slowMark = 1000 / (1 + this.drawArr.length * 0.8 * 5);
-      let secs = 500;
+      let secs = 0;
       for(let i = 0; i < this.drawArr.length; i++) {
         if(i / this.drawArr.length < .8){
           secs += 800 / (1 + i * 10);
