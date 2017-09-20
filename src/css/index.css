@@ -42,7 +42,7 @@ html {
 
 /*Idea Box*/
 #ideaCanv {
-  border: solid #777 3px;
+  border: solid #777 2px;
 }
 .simpleCntr {
   display: flex;

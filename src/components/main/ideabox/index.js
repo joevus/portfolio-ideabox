@@ -14,7 +14,9 @@ class IdeaboxContainer extends React.Component {
     this.isMouseDown = true;
     this.ctx = this.props.context;
     // set color to default
-    this.ctx.fillStyle = "black";
+    this.ctx.fillStyle = "#353535";
+    this.ctx.strokeStyle = "#353535";
+    this.ctx.lineWidth = 2;
     this.drawArr = [];
     console.log("mousedown");
   }
@@ -30,21 +32,30 @@ class IdeaboxContainer extends React.Component {
     if(this.isMouseDown) {
       var X = e.pageX - e.target.offsetLeft;
       var Y = e.pageY - e.target.offsetTop;
-      this.ctx.fillRect(X, Y, 10, 10);
+      // this.ctx.fillRect(X, Y, 10, 10);
+      this.ctx.beginPath();
+      this.ctx.arc(X, Y, 10, 0, Math.PI * 2);
+      this.ctx.fill();
+      this.ctx.stroke();
       this.drawArr.push([X,Y]);
     }
   }
 
   pizzazzIt = () => {
-    this.ctx.fillStyle = "#FF0000";
+    // this.ctx.fillStyle = "#FF0000";
+    this.ctx.fillStyle = "#a67c00";
 
 
     let recolor = (i) => {
-      this.ctx.fillRect(this.drawArr[i][0], this.drawArr[i][1], 10, 10)
+      this.ctx.beginPath();
+      //this.ctx.fillRect(this.drawArr[i][0], this.drawArr[i][1], 10, 10)
+      this.ctx.arc(this.drawArr[i][0], this.drawArr[i][1], 10, 0, Math.PI * 2);
+      this.ctx.fill();
     }
 
     let drawFringe = (i) => {
-      this.ctx.strokeStyle = "#D4AF37";
+      // this.ctx.strokeStyle = "#D4AF37";
+      this.ctx.strokeStyle = "#ffbf00";
       if(i > 0 && i % 10 === 0){
         let x = this.drawArr[i - 5][0];
         let y = this.drawArr[i - 5][1];
