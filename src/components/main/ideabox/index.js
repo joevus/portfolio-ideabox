@@ -36,7 +36,7 @@ class IdeaboxContainer extends React.Component {
       this.ctx.beginPath();
       this.ctx.arc(X, Y, 10, 0, Math.PI * 2);
       this.ctx.fill();
-      this.ctx.stroke();
+      // this.ctx.stroke();
       this.drawArr.push([X,Y]);
     }
   }
@@ -47,15 +47,22 @@ class IdeaboxContainer extends React.Component {
 
 
     let recolor = (i) => {
+
       this.ctx.beginPath();
       //this.ctx.fillRect(this.drawArr[i][0], this.drawArr[i][1], 10, 10)
       this.ctx.arc(this.drawArr[i][0], this.drawArr[i][1], 10, 0, Math.PI * 2);
+      this.ctx.strokeStyle = "#ffbf00";
+      this.ctx.stroke();
+      this.ctx.fillStyle = "#a67c00";
       this.ctx.fill();
     }
 
     let drawFringe = (i) => {
       // this.ctx.strokeStyle = "#D4AF37";
-      this.ctx.strokeStyle = "#ffbf00";
+      // stroke first with large, dark line for outline
+      this.ctx.strokeStyle = "#353535";
+      this.lineWidth = 4;
+
       if(i > 0 && i % 10 === 0){
         let x = this.drawArr[i - 5][0];
         let y = this.drawArr[i - 5][1];
@@ -118,6 +125,10 @@ class IdeaboxContainer extends React.Component {
           this.ctx.stroke();
         }
       }
+      // now stroke with light color for inside
+      this.ctx.strokeStyle = "#ffbf00";
+      this.ctx.lineWidth = 2;
+      this.ctx.stroke();
     }
 
     let drawEffects = () => {
@@ -139,7 +150,7 @@ class IdeaboxContainer extends React.Component {
         setTimeout(()=>{
           //this.ctx.fillRect(this.drawArr[i][0], this.drawArr[i][1], 10, 10)
           recolor(i);
-          drawFringe(i);
+          // drawFringe(i);
         }, secs)
       }
     }
