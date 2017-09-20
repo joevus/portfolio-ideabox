@@ -44,11 +44,11 @@ class IdeaboxContainer extends React.Component {
     }
 
     let drawFringe = (i) => {
-      if(i > 0 && i % 5 === 0){
-        let x = this.drawArr[i - 2][0];
-        let y = this.drawArr[i - 2][1];
+      if(i > 0 && i % 10 === 0){
+        let x = this.drawArr[i - 5][0];
+        let y = this.drawArr[i - 5][1];
         let slope = (this.drawArr[i][1] - this.drawArr[i - 5][1])/(this.drawArr[i][0] - this.drawArr[i - 5][0]);
-        if(slope > 0.5 && slope < 10) {
+        if(slope > 0.2 && slope < 5) {
           // positive
 
           // left of line
@@ -61,6 +61,48 @@ class IdeaboxContainer extends React.Component {
           this.ctx.beginPath();
           this.ctx.moveTo(x + 10, y - 10);
           this.ctx.lineTo(x + 20, y - 20);
+          this.ctx.stroke();
+        } else if(slope < -0.2 && slope > -5) {
+          // negative
+
+          //left of line
+          this.ctx.beginPath();
+          this.ctx.moveTo(x - 10, y - 10);
+          this.ctx.lineTo(x - 20, y - 20);
+          this.ctx.stroke();
+
+          //right of line
+          this.ctx.beginPath();
+          this.ctx.moveTo(x + 10, y + 10);
+          this.ctx.lineTo(x + 20, y + 20);
+          this.ctx.stroke();
+        } else if(slope > 5 || slope < -5) {
+          // vertical
+
+          // left of line
+          this.ctx.beginPath();
+          this.ctx.moveTo(x - 10, y);
+          this.ctx.lineTo(x - 20, y);
+          this.ctx.stroke();
+
+          // right of line
+          this.ctx.beginPath();
+          this.ctx.moveTo(x + 10, y);
+          this.ctx.lineTo(x + 20, y);
+          this.ctx.stroke();
+        } else {
+          // horizontal
+
+          // above line
+          this.ctx.beginPath();
+          this.ctx.moveTo(x, y + 10);
+          this.ctx.lineTo(x, y + 20);
+          this.ctx.stroke();
+
+          // below of line
+          this.ctx.beginPath();
+          this.ctx.moveTo(x, y - 10);
+          this.ctx.lineTo(x, y - 20);
           this.ctx.stroke();
         }
       }
@@ -82,7 +124,11 @@ class IdeaboxContainer extends React.Component {
         }
 
         // refill drawing with new color
-        setTimeout(()=>{this.ctx.fillRect(this.drawArr[i][0], this.drawArr[i][1], 10, 10)}, secs)
+        setTimeout(()=>{
+          //this.ctx.fillRect(this.drawArr[i][0], this.drawArr[i][1], 10, 10)
+          recolor(i);
+          drawFringe(i);
+        }, secs)
       }
     }
 
