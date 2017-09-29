@@ -143,13 +143,33 @@ class IdeaboxContainer extends React.Component {
       this.ctx.stroke();
     }
 
+    let glowCount = null;
+
+    let hereGlows = () => {
+      console.log("glow");
+      if(!glowCount) { glowCount = 0;}
+      glowCount++;
+      if(this.ctx.globalAlpha < 0.7) {
+        this.ctx.globalAlpha += 0.04;
+      } else {
+        this.ctx.globalAlpha -= 0.05;
+      }
+
+      //this.ctx.clearRect(0, 0, 400, 400);
+      this.ctx.fill();
+
+      // if(glowCount < 1000) {
+      //   requestAnimationFrame(hereGlows);
+      // }
+    }
+
     let drawEffects = () => {
       // drawing speed increases until slowMark, then it slows
       let slowMark = 1000 / (1 + this.drawArr.length * 0.8 * 5);
       let secs = 0;
       for(let i = 0; i < this.drawArr.length; i++) {
         if(i / this.drawArr.length < .8){
-          secs += 500 / (1 + i * 10);
+          secs += 400 / (1 + i * 10);
         } else {
 
           // when i is 80% of this.drawArr.length, (i / (this.drawArr.length * .9))
@@ -158,13 +178,14 @@ class IdeaboxContainer extends React.Component {
           secs += slowMark + (i / (this.drawArr.length * .8)) * 100 - 100;
         }
 
-        setTimeout(()=> {strokeColor(i)}, secs/1.5);
+        setTimeout(()=> {strokeColor(i)}, secs/1.1);
         // refill drawing with new color
         setTimeout(()=>{
           //this.ctx.fillRect(this.drawArr[i][0], this.drawArr[i][1], 10, 10)
           fillColor(i);
           // drawFringe(i);
-        }, secs)
+        }, secs);
+        setTimeout(hereGlows, 4000);
       }
     }
 
