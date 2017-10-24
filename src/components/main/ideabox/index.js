@@ -80,21 +80,54 @@ class IdeaboxContainer extends React.Component {
       // counter for animation frames
       if(!glowCount) { glowCount = 0;}
       glowCount++;
-
       let imgData = this.ctx.getImageData(0,0,canvas.width, canvas.height);
-      for(let i = 0; i < imgData.data.length; i += 4 * 500 * 10 - 1 ){
-        console.log(i);
-        let j = 0;
-        for(j; j < 4 * 500; j += 4){
-          imgData.data[i + j] = 100;
-        }
-        for(let k = 0; k < 4 * 500; k += 4){
-          imgData.data[k + j] = 100;
-        }
-        for(let l = 0; l < 4 * 500; l += 4){
-          imgData.data[l + j] = 100;
+      // array to store edge points
+      let edgeArr = [];
+      // length of data for one unit of canvas width
+      let dataRow = 4 * canvas.width;
+      for(let i = 0; i < imgData.data.length; i += dataRow * 1){
+        // find edges of painted part of canvas by checking alpha data
+        // Paint in gleam border on edges
+        for (let j = 3; j < dataRow; j += 4) {
+          // ignore golden gleam edges
+          if(imgData.data[i + j - 3] === 255 && imgData.data[i + j - 2] === 191 && imgData.data[i + j - 1] === 0) {
+            continue;
+          }
+          // find edges by horizontal checking
+          if(imgData.data[i + j] === 255 && (imgData.data[i + j - 4] !== 255 || imgData.data[i + j + 4] !== 255)) {
+            // imgData.data[i + j - 3] = 255;
+            // imgData.data[i + j - 2] = 191
+            // imgData.data[i + j - 1] = 0;
+            let x = j / 4;
+            let y = i / dataRow;
+            edgeArr.push([x, y]);
+          }
+          if(imgData.data[i + j] === 255 && (imgData.data[i + j - dataRow] !== 255 || imgData.data[i + j + dataRow] !== 255)){
+            let x = j / 4;
+            let y = i /dataRow;
+            edgeArr.push([x,y]);
+          }
+          // find edges by vertical checking
         }
 
+
+        // for(let j = 0; j < dataRow; j += 4){
+        //   imgData.data[i + j] = 200;
+        // }
+        // for(let k = 1; k < dataRow; k += 4){
+        //   imgData.data[i + k] = 0;
+        // }
+        // for(let l = 2; l < dataRow; l += 4){
+        //   imgData.data[i + l] = 0;
+        // }
+        //
+        // for(let m = 3; m < dataRow; m += 4) {
+        //   imgData.data[i + m] = 255;
+        // }
+
+        // for(let i = 0; i < 5000; i++) {
+        //   console.log(imgData.data[i]);
+        // }
 
         // ignore white pixels
         // if(imgData.data[i-3] === 0 && imgData.data[i-2] === 0 && imgData.data[i-1] === 0) {
@@ -112,13 +145,16 @@ class IdeaboxContainer extends React.Component {
         //   }
         // }
       }
-
-
-
-
-
+      // console.log(edgeArr);
+      // draw gleaming circles on edges
+      for(let i = 0; i < edgeArr.length; i++) {
+        this.ctx.beginPath();
+        this.ctx.arc(edgeArr[i][0], edgeArr[i][1], 2, 0, Math.PI * 2);
+        this.ctx.fillStyle = "#ffbf00";
+        this.ctx.fill();
+      }
       // draw the change
-      this.ctx.putImageData(imgData,0,0);
+      //this.ctx.putImageData(imgData,0,0);
 
       // if(glowCount < 150) {
       //   requestAnimationFrame(hereGlows);
@@ -149,8 +185,9 @@ class IdeaboxContainer extends React.Component {
           fillColor(i);
           // drawFringe(i);
         }, secs);
-        setTimeout(hereGlows, 3000);
+
       }
+      setTimeout(hereGlows, 3000);
     }
 
     drawEffects();
