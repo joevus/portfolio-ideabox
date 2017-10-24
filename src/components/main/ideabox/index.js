@@ -4,6 +4,13 @@ import Ideabox from "./ideabox.js";
 import { connect } from "react-redux";
 import { click } from "../../../actions";
 
+/*
+  Next steps:
+  - make the gleam happen only once the gold redraw finishes
+  - make it sparkle/glow
+*/
+
+
 class IdeaboxContainer extends React.Component {
 
   handleClick = (e) => {
