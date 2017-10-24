@@ -69,98 +69,62 @@ class IdeaboxContainer extends React.Component {
       this.ctx.fill();
     }
 
-    let drawFringe = (i) => {
-      // this.ctx.strokeStyle = "#D4AF37";
-      // stroke first with large, dark line for outline
-      this.ctx.strokeStyle = "#353535";
-      this.lineWidth = 4;
-
-      if(i > 0 && i % 10 === 0){
-        let x = this.drawArr[i - 5][0];
-        let y = this.drawArr[i - 5][1];
-        let slope = (this.drawArr[i][1] - this.drawArr[i - 5][1])/(this.drawArr[i][0] - this.drawArr[i - 5][0]);
-        if(slope > 0.2 && slope < 5) {
-          // positive
-
-          // left of line
-          this.ctx.beginPath();
-          this.ctx.moveTo(x - 10, y + 10);
-          this.ctx.lineTo(x - 20, y + 20);
-          this.ctx.stroke();
-
-          // right of line
-          this.ctx.beginPath();
-          this.ctx.moveTo(x + 10, y - 10);
-          this.ctx.lineTo(x + 20, y - 20);
-          this.ctx.stroke();
-        } else if(slope < -0.2 && slope > -5) {
-          // negative
-
-          //left of line
-          this.ctx.beginPath();
-          this.ctx.moveTo(x - 10, y - 10);
-          this.ctx.lineTo(x - 20, y - 20);
-          this.ctx.stroke();
-
-          //right of line
-          this.ctx.beginPath();
-          this.ctx.moveTo(x + 10, y + 10);
-          this.ctx.lineTo(x + 20, y + 20);
-          this.ctx.stroke();
-        } else if(slope > 5 || slope < -5) {
-          // vertical
-
-          // left of line
-          this.ctx.beginPath();
-          this.ctx.moveTo(x - 10, y);
-          this.ctx.lineTo(x - 20, y);
-          this.ctx.stroke();
-
-          // right of line
-          this.ctx.beginPath();
-          this.ctx.moveTo(x + 10, y);
-          this.ctx.lineTo(x + 20, y);
-          this.ctx.stroke();
-        } else {
-          // horizontal
-
-          // above line
-          this.ctx.beginPath();
-          this.ctx.moveTo(x, y + 10);
-          this.ctx.lineTo(x, y + 20);
-          this.ctx.stroke();
-
-          // below of line
-          this.ctx.beginPath();
-          this.ctx.moveTo(x, y - 10);
-          this.ctx.lineTo(x, y - 20);
-          this.ctx.stroke();
-        }
-      }
-      // now stroke with light color for inside
-      this.ctx.strokeStyle = "#ffbf00";
-      this.ctx.lineWidth = 2;
-      this.ctx.stroke();
-    }
-
     let glowCount = null;
 
+    // get image data and canvas element
+    let canvas = document.getElementById("ideaCanv");
+    console.log(this.ctx.getImageData(0,0,canvas.width, canvas.height));
+    let waxingTransparent = true;
+
     let hereGlows = () => {
-      console.log("glow");
+      // counter for animation frames
       if(!glowCount) { glowCount = 0;}
       glowCount++;
-      if(this.ctx.globalAlpha < 0.7) {
-        this.ctx.globalAlpha += 0.04;
-      } else {
-        this.ctx.globalAlpha -= 0.05;
+
+      let imgData = this.ctx.getImageData(0,0,canvas.width, canvas.height);
+      for(let i = 0; i < imgData.data.length; i += 4 * 500 * 10 - 1 ){
+        console.log(i);
+        let j = 0;
+        for(j; j < 4 * 500; j += 4){
+          imgData.data[i + j] = 100;
+        }
+        for(let k = 0; k < 4 * 500; k += 4){
+          imgData.data[k + j] = 100;
+        }
+        for(let l = 0; l < 4 * 500; l += 4){
+          imgData.data[l + j] = 100;
+        }
+
+
+        // ignore white pixels
+        // if(imgData.data[i-3] === 0 && imgData.data[i-2] === 0 && imgData.data[i-1] === 0) {
+        //   continue;
+        // }
+        // if(waxingTransparent) {
+        //   imgData.data[i] -= 1;
+        //   if(imgData.data[i] < 100) {
+        //     waxingTransparent = false;
+        //   }
+        // } else {
+        //   imgData.data[i] += 1;
+        //   if(imgData.data[i] >= 255) {
+        //     waxingTransparent = true;
+        //   }
+        // }
       }
 
-      //this.ctx.clearRect(0, 0, 400, 400);
-      this.ctx.fill();
 
-      // if(glowCount < 1000) {
+
+
+
+      // draw the change
+      this.ctx.putImageData(imgData,0,0);
+
+      // if(glowCount < 150) {
       //   requestAnimationFrame(hereGlows);
       // }
+
+      // console.log(this.ctx.getImageData(0,0,canvas.width, canvas.height));
     }
 
     let drawEffects = () => {
@@ -185,7 +149,7 @@ class IdeaboxContainer extends React.Component {
           fillColor(i);
           // drawFringe(i);
         }, secs);
-        setTimeout(hereGlows, 4000);
+        setTimeout(hereGlows, 3000);
       }
     }
 
