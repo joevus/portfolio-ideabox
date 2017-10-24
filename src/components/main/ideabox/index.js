@@ -142,7 +142,7 @@ class IdeaboxContainer extends React.Component {
           secs += slowMark + (i / (this.drawArr.length * .8)) * 100 - 100;
         }
 
-        setTimeout(()=> {strokeColor(i)}, secs/1.1);
+        //setTimeout(()=> {strokeColor(i)}, secs/1.1);
         // refill drawing with new color
         setTimeout(()=>{
           //this.ctx.fillRect(this.drawArr[i][0], this.drawArr[i][1], 10, 10)
