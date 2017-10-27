@@ -17,8 +17,7 @@ class IdeaboxContainer extends React.Component {
   handleClick = (e) => {
   }
 
-  handlePlusClick = (e) => {
-
+  handlePlus = (e) => {
     let canvas = document.getElementById("ideaCanv");
     let ctx = this.props.context;
     // this.ctx = canvas.getContext("2d");
@@ -41,8 +40,24 @@ class IdeaboxContainer extends React.Component {
         imgData.data[i] = 100;
       }
     }
-    ctx = this.props.context;
     ctx.putImageData(imgData,0,0);
+  }
+
+  handlePlay = (e) => {
+
+    let counter = 0;
+    let ctx = this.props.context;
+
+    let showFrame = () => {
+      console.log('run play');
+      ctx.putImageData(this.state.sketches[counter],0,0);
+      counter++;
+      if(counter === this.state.sketches.length) {
+        clearInterval(playId);
+      }
+    }
+    let playId = setInterval(showFrame, 200);
+
   }
 
   handleMouseDown = (e) => {
@@ -102,7 +117,7 @@ class IdeaboxContainer extends React.Component {
   render() {
     return (
       <Ideabox handleClick={this.handleClick} handleMouseDown={this.handleMouseDown} handleMouseUp={this.handleMouseUp} handleMouseMove={this.handleMouseMove}
-      handlePlusClick={this.handlePlusClick} />
+      handlePlus={this.handlePlus} handlePlay={this.handlePlay} />
     );
   }
 }
