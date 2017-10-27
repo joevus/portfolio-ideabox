@@ -52,11 +52,6 @@ class Ideabox extends React.Component {
           </div>
         </div>
 
-        <div className="simpleCntr">
-          <button>&lt;</button>
-          <button>&gt;</button>
-        </div>
-
       </div>
     );
   }
