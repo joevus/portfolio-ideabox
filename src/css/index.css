@@ -41,9 +41,69 @@ html {
 }
 
 /*Idea Box*/
+
+/*The way to center the canvas and toolbar on the page is to
+create a parent div that is variably the entire width of the screen and center
+it using flex or grid and then have its child be the canvas-and-toolbar-cont
+with its grid intact but not with justify-items:center on it*/
+
+/*for mobile screens*/
+.canvas-and-toolbar-cont{
+  /*display: grid;
+  grid-template-columns: 80% 20%;*/
+}
+.toolbar {
+  display: flex;
+  justify-content: center;
+}
+.toolbar button {
+  /*display: block;*/
+  margin-left: 5px;
+  margin-bottom: 5px;
+  font-size: 1.33em;
+}
+
+
+/*small screens*/
+@media (min-width: 768px){
+  .canvas-and-toolbar-cont{
+    display: grid;
+    grid-template-columns: 540px 84px;
+  }
+  .cntr-on-small-plus {
+    display: flex;
+    justify-content: center;
+  }
+  .toolbar {
+    /* get rid of display flex, otherwise will be giant*/
+    display: block;
+  }
+  .toolbar button {
+    /*display: block;*/
+    margin-left: 15px;
+    margin-bottom: 5px;
+    font-size: 3em;
+  }
+}
+/* medium screens*/
+@media (min-width: 992px){
+  .canvas-and-toolbar-cont{
+    display: grid;
+    grid-template-columns: 800px 84px;
+  }
+}
+
+
+#canvas-container {
+  grid-column: 1/2;
+}
+.toolbar {
+  grid-column: 2/3;
+  vertical-align: top;
+}
 #ideaCanv {
-  border: solid #777 2px;
-  border-radius: 8px;
+  /*border: solid #777 2px;
+  border-radius: 8px;*/
 }
 .simpleCntr {
   display: flex;
