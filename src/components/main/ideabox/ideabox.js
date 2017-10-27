@@ -15,6 +15,10 @@ class Ideabox extends React.Component {
   updateDimensions() {
     let canvasWidth = document.getElementById('canvas-container').offsetWidth;
     this.setState({canvasWidth});
+    // if updateDimension gets called again (like on a resize event)
+    // retrieve canvas ctx and store it.
+    var ctx = this.refs.canvas.getContext('2d');
+    this.props.storeCanvasCtxt(ctx);
   }
 
   componentWillMount() {
@@ -42,7 +46,7 @@ class Ideabox extends React.Component {
             </div>
 
             <div className="toolbar">
-              <button><i className="fa fa-plus fa-fw"></i></button>
+              <button onClick={this.props.handlePlusClick}><i className="fa fa-plus fa-fw"></i></button>
               <button><i className="fa fa-play fa-fw"></i></button>
               <button><i className="fa fa-step-backward fa-fw"></i></button>
               <button><i className="fa fa-step-forward fa-fw"></i></button>

@@ -4,16 +4,45 @@ import Ideabox from "./ideabox.js";
 import { connect } from "react-redux";
 import { click } from "../../../actions";
 
-/*
-  Next steps:
-  - make the gleam happen only once the gold redraw finishes
-  - make it sparkle/glow
-*/
-
 
 class IdeaboxContainer extends React.Component {
 
+  constructor() {
+    super();
+    this.state = {
+      sketches: []
+    }
+  }
+
   handleClick = (e) => {
+  }
+
+  handlePlusClick = (e) => {
+
+    let canvas = document.getElementById("ideaCanv");
+    let ctx = this.props.context;
+    // this.ctx = canvas.getContext("2d");
+    let imgData = ctx.getImageData(0,0,canvas.width, canvas.height);
+    // get rid of previous translucent sketch
+    for( let i = 3; i < imgData.data.length; i += 4){
+      if(imgData.data[i] < 255) {
+        imgData.data[i] = 0;
+      }
+    }
+    // Add sketch to sketches
+    let sketches = this.state.sketches;
+    sketches.push(imgData);
+    this.setState({
+      sketches: sketches
+    });
+    // make current sketch translucent
+    for(let i = 3; i < imgData.data.length; i += 4) {
+      if(imgData.data[i] === 255) {
+        imgData.data[i] = 100;
+      }
+    }
+    ctx = this.props.context;
+    ctx.putImageData(imgData,0,0);
   }
 
   handleMouseDown = (e) => {
@@ -72,7 +101,8 @@ class IdeaboxContainer extends React.Component {
 
   render() {
     return (
-      <Ideabox handleClick={this.handleClick} handleMouseDown={this.handleMouseDown} handleMouseUp={this.handleMouseUp} handleMouseMove={this.handleMouseMove} />
+      <Ideabox handleClick={this.handleClick} handleMouseDown={this.handleMouseDown} handleMouseUp={this.handleMouseUp} handleMouseMove={this.handleMouseMove}
+      handlePlusClick={this.handlePlusClick} />
     );
   }
 }
