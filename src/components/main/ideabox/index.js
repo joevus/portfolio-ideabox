@@ -22,10 +22,22 @@ class IdeaboxContainer extends React.Component {
     let ctx = this.props.context;
     // this.ctx = canvas.getContext("2d");
     let imgData = ctx.getImageData(0,0,canvas.width, canvas.height);
+
     // get rid of previous translucent sketch
     for( let i = 3; i < imgData.data.length; i += 4){
-      if(imgData.data[i] < 255) {
-        imgData.data[i] = 0;
+      if(imgData.data[i] < 255 && imgData.data[i] > 0) {
+        // console.log("found one more than zero, less than 255: " + imgData.data[i]);
+        // console.log("alpha: " + imgData.data[i]);
+        // console.log("r: " + imgData.data[i - 3]);
+        // console.log("g: " + imgData.data[i - 2]);
+        // console.log("b: " + imgData.data[i - 1]);
+      }
+      // && imgData.data[i - 3] === 10
+      if(imgData.data[i] === 60 ) {
+        imgData.data[i] = 0; // alpha, maybe only this necessary
+        imgData.data[i - 1] = 0; // blue
+        imgData.data[i - 2] = 0; // green
+        imgData.data[i - 3] = 0; // red
       }
     }
     // Add sketch to sketches
@@ -35,12 +47,23 @@ class IdeaboxContainer extends React.Component {
       sketches: sketches
     });
     // make current sketch translucent
-    for(let i = 3; i < imgData.data.length; i += 4) {
-      if(imgData.data[i] === 255) {
-        imgData.data[i] = 100;
+    //   put in function so doesn't pass imgData by reference and so it avoids
+    //   making all imgData objets in sketches array translucent
+
+    //   first apply removal of translucent pixels change
+    ctx.putImageData(imgData, 0, 0);
+    let newImgData = ctx.getImageData(0,0,canvas.width, canvas.height);
+    console.log(imgData);
+    console.log(newImgData);
+    for(let i = 0; i < newImgData.data.length; i += 4) {
+      if(newImgData.data[i] === 20) {
+        newImgData.data[i] = 10; // red
+        newImgData.data[i + 1] = 10; // green
+        newImgData.data[i + 2] = 50; // blue
+        newImgData.data[i + 3] = 60; // alpha
       }
     }
-    ctx.putImageData(imgData,0,0);
+    ctx.putImageData(newImgData,0,0);
   }
 
   handlePlay = (e) => {
@@ -49,7 +72,6 @@ class IdeaboxContainer extends React.Component {
     let ctx = this.props.context;
 
     let showFrame = () => {
-      console.log('run play');
       ctx.putImageData(this.state.sketches[counter],0,0);
       counter++;
       if(counter === this.state.sketches.length) {
@@ -77,6 +99,7 @@ class IdeaboxContainer extends React.Component {
       var Y = e.pageY - e.target.offsetTop;
       this.ctx.beginPath();
       this.ctx.arc(X, Y, 10, 0, Math.PI * 2);
+      this.ctx.fillStyle = 'rgb(20,20,20)';
       this.ctx.fill();
     }
   }
