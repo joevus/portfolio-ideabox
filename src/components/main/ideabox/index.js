@@ -55,12 +55,12 @@ class IdeaboxContainer extends React.Component {
     let newImgData = ctx.getImageData(0,0,canvas.width, canvas.height);
     console.log(imgData);
     console.log(newImgData);
-    for(let i = 0; i < newImgData.data.length; i += 4) {
-      if(newImgData.data[i] === 20) {
-        newImgData.data[i] = 10; // red
-        newImgData.data[i + 1] = 10; // green
-        newImgData.data[i + 2] = 50; // blue
-        newImgData.data[i + 3] = 60; // alpha
+    for(let i = 3; i < newImgData.data.length; i += 4) {
+      if(newImgData.data[i] > 0) {
+        newImgData.data[i - 3] = 10; // red
+        newImgData.data[i - 2] = 10; // green
+        newImgData.data[i - 1] = 50; // blue
+        newImgData.data[i] = 60; // alpha
       }
     }
     ctx.putImageData(newImgData,0,0);
