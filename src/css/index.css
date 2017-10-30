@@ -84,7 +84,8 @@ with its grid intact but not with justify-items:center on it*/
   .toolbar button {
     /*display: block;*/
     margin-left: 15px;
-    margin-bottom: 5px;
+    margin-top: 8px;
+    margin-bottom: 8px;
     font-size: 3em;
   }
 }
