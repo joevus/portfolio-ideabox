@@ -46,12 +46,12 @@ class Ideabox extends React.Component {
             </div>
 
             <div className="toolbar">
-              <button onClick={this.props.handlePlus}><i className="fa fa-plus fa-fw"></i></button>
-              <button onClick={this.props.handlePlay}><i className="fa fa-play fa-fw"></i></button>
-              <button><i className="fa fa-step-backward fa-fw"></i></button>
+              <button onClick={this.props.handlePlus}><i className="fa fa-plus"></i></button>
+              <button onClick={this.props.handlePlay}><i className="fa fa-play"></i></button>
+              {/* <button><i className="fa fa-step-backward fa-fw"></i></button>
               <button><i className="fa fa-step-forward fa-fw"></i></button>
               <button><i className="fa fa-pencil fa-fw"></i></button>
-              <button><i className="fa fa-eraser fa-fw"></i></button>
+              <button><i className="fa fa-eraser fa-fw"></i></button> */}
             </div>
           </div>
         </div>
