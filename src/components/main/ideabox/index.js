@@ -10,7 +10,8 @@ class IdeaboxContainer extends React.Component {
   constructor() {
     super();
     this.state = {
-      sketches: []
+      sketches: [],
+      shadowSketches: []
     }
   }
 
@@ -52,9 +53,8 @@ class IdeaboxContainer extends React.Component {
 
     //   first apply removal of translucent pixels change
     ctx.putImageData(imgData, 0, 0);
+    //   then make left over drawing translucent
     let newImgData = ctx.getImageData(0,0,canvas.width, canvas.height);
-    console.log(imgData);
-    console.log(newImgData);
     for(let i = 3; i < newImgData.data.length; i += 4) {
       if(newImgData.data[i] > 0) {
         newImgData.data[i - 3] = 10; // red
@@ -64,6 +64,13 @@ class IdeaboxContainer extends React.Component {
       }
     }
     ctx.putImageData(newImgData,0,0);
+    // Store translucent sketche
+    let shadowSketch = ctx.getImageData(0,0,canvas.width, canvas.height);
+    let shadowSketches = this.state.shadowSketches;
+    shadowSketches.push(shadowSketch);
+    this.setState({
+      shadowSketches
+    })
   }
 
   handlePlay = (e) => {
@@ -71,11 +78,22 @@ class IdeaboxContainer extends React.Component {
     let counter = 0;
     let ctx = this.props.context;
 
+    let putLastShadowSketch = () => {
+      let shadowLength = this.state.shadowSketches.length;
+      console.log(shadowLength);
+      // do nothing if haven't added any frames
+      if(shadowLength === 0) { return; }
+      // otherwise display last shadow sketch
+      ctx.putImageData(this.state.shadowSketches[shadowLength - 1], 0, 0);
+    }
+
     let showFrame = () => {
       ctx.putImageData(this.state.sketches[counter],0,0);
       counter++;
       if(counter === this.state.sketches.length) {
         clearInterval(playId);
+        // display latest shadow sketch after some time
+        setTimeout(putLastShadowSketch, 1000);
       }
     }
     let playId = setInterval(showFrame, 200);
