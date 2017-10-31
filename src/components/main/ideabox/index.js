@@ -156,17 +156,16 @@ class IdeaboxContainer extends React.Component {
 
   componentDidMount = () => {
     this.handleLoad();
+    // this.ctx = this.props.context;
   }
 
   introShow = () => {
     // get image data and canvas element
     let canvas = document.getElementById("ideaCanv");
+    let ctx = canvas.getContext("2d");
 
-    let hereGlows = () => {
-      let imgData = this.ctx.getImageData(0,0,canvas.width, canvas.height);
-      let ctx = this.ctx;
-      // array to store edge points
-      let edgeArr = [];
+    let hereGlowsStatic = () => {
+      let imgData = ctx.getImageData(0,0,canvas.width, canvas.height);
       // length of data for one unit of canvas width
       let dataRow = 4 * canvas.width;
 
@@ -184,10 +183,11 @@ class IdeaboxContainer extends React.Component {
         }
         ctx.putImageData(imgData,0,0);
       }
-      let randomTime = setInterval(randomBlack, 200);
-      setTimeout(function(){clearInterval(randomTime)}, 6000);
-
+      return setInterval(randomBlack, 30);
     }
+
+    let staticId = hereGlowsStatic();
+    setTimeout(function(){clearInterval(staticId)}, 2600);
 
   } // end introShow
 
