@@ -10,3 +10,10 @@ export function storeCanvasCtxt(context) {
     context
   }
 }
+
+// export function updateCanvasDimensions(canvas){
+//   return {
+//     type: "UPDATE_CANVAS_DIMENSIONS",
+//     canvas
+//   }
+// }

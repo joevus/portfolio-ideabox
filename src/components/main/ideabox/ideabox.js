@@ -4,12 +4,15 @@ import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import { storeCanvasCtxt } from "../../../actions";
 
+import playButton from './images/play-button-pixa-bay-small.png';
+
 class Ideabox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
 
     }
+
   }
 
   updateDimensions() {
@@ -27,8 +30,11 @@ class Ideabox extends React.Component {
 
   componentDidMount() {
     // put update dimensions here so that scrollbars have time to appear and
-    // will be taken into accound for the width
+    // will be taken into account for the width
     this.updateDimensions();
+    // run things that need to laod when component mounts.
+    // - paintIntroFrame
+    // this.props.handleLoad();
 
     var ctx = this.refs.canvas.getContext('2d');
     this.props.storeCanvasCtxt(ctx);
@@ -36,10 +42,15 @@ class Ideabox extends React.Component {
 
   render() {
     return(
-      <div >
+        <div className="cntr-on-small-plus main-top">
+          <div className="intro-frame">
 
-        <h2 className="ideaBoxHd">Idea Box</h2>
-        <div className="cntr-on-small-plus">
+            <img src={playButton} alt="play button" />
+            <h1>Idea</h1>
+            <h1>Box</h1>
+
+            {/* <h1>Box</h1>*/}
+          </div>
           <div className="canvas-and-toolbar-cont">
             <div id="canvas-container">
               <canvas ref="canvas" id="ideaCanv" width={this.state.canvasWidth + "px"} height="400px" onClick={this.props.handleClick} onMouseDown={this.props.handleMouseDown} onMouseUp={this.props.handleMouseUp} onMouseMove={this.props.handleMouseMove}></canvas>
@@ -55,8 +66,6 @@ class Ideabox extends React.Component {
             </div>
           </div>
         </div>
-
-      </div>
     );
   }
 }

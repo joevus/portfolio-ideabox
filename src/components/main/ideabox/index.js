@@ -13,6 +13,8 @@ class IdeaboxContainer extends React.Component {
       sketches: [],
       shadowSketches: []
     }
+    // to track whether intro has been clicked
+    this.introClicked = false;
   }
 
   handleClick = (e) => {
@@ -114,7 +116,8 @@ class IdeaboxContainer extends React.Component {
   handleMouseMove = (e) => {
     if(this.isMouseDown) {
       var X = e.pageX - e.target.offsetLeft;
-      var Y = e.pageY - e.target.offsetTop;
+      // offsetParent because the parent is position:relative
+      var Y = e.pageY - e.target.offsetParent.offsetTop;
       this.ctx.beginPath();
       this.ctx.arc(X, Y, 8, 0, Math.PI * 2);
       this.ctx.fillStyle = 'rgb(20,20,20)';
@@ -122,7 +125,38 @@ class IdeaboxContainer extends React.Component {
     }
   }
 
-  pizzazzIt = () => {
+  handleIntroClick = () => {
+    // For first click on canvas, if clicked anywhere besides "skip intro",
+    // run introShow. Otherwise, skip intro.
+    if(!this.introClicked){
+      this.introShow();
+    }
+
+  }
+
+  paintIntroFrame = () => {
+    // What the canvas shows before it's clicked.
+    // setTimeout(function(){
+      let canvas = document.getElementById("ideaCanv");
+      let ctx = canvas.getContext("2d");
+
+      ctx.beginPath();
+      ctx.fillStyle = "#FF0000";
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+    // }, 1);
+
+  }
+
+  handleLoad = () => {
+    // run things that need to run when component loads
+    this.paintIntroFrame();
+  }
+
+  componentDidMount = () => {
+    this.handleLoad();
+  }
+
+  introShow = () => {
     // get image data and canvas element
     let canvas = document.getElementById("ideaCanv");
 
@@ -153,12 +187,13 @@ class IdeaboxContainer extends React.Component {
 
     }
 
-  } // end pizzazzIt
+  } // end introShow
 
   render() {
     return (
       <Ideabox handleClick={this.handleClick} handleMouseDown={this.handleMouseDown} handleMouseUp={this.handleMouseUp} handleMouseMove={this.handleMouseMove}
-      handlePlus={this.handlePlus} handlePlay={this.handlePlay} />
+      handlePlus={this.handlePlus} handlePlay={this.handlePlay}
+      handleLoad={this.handleLoad} />
     );
   }
 }

@@ -16,6 +16,8 @@ let mainReducer = (state = defaultState, action) => {
         ...state,
         context: action.context
       };
+    // case "UPDATE_CANVAS_DIMENSIONS":
+    //   action.canvas
     default:
       return state;
   }

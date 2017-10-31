@@ -1,6 +1,11 @@
 *, *:before, *:after {
   box-sizing: inherit;
 }
+html, body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
 html {
   box-sizing: border-box;
 }
@@ -9,7 +14,7 @@ html {
   display: flex;
   align-items: center;
   width: 100%;
-  background: #eee;
+  background: #55aa77;
 }
 
 .brand {
@@ -47,10 +52,43 @@ create a parent div that is variably the entire width of the screen and center
 it using flex or grid and then have its child be the canvas-and-toolbar-cont
 with its grid intact but not with justify-items:center on it*/
 
+
+.main-top {
+  position: relative;
+}
+
+.intro-frame {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #eee;
+  opacity: 0.98;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 600ms, opacity 600ms;
+}
+
+.intro-frame:hover {
+  background-color: #ddddee;
+  opacity: 0.8;
+}
+
+.intro-frame img {
+  width: 100px;
+  height: 100px;
+  margin: 50px;
+}
+
 /*for mobile screens*/
 .canvas-and-toolbar-cont{
   /*display: grid;
   grid-template-columns: 80% 20%;*/
+  /*when made main-top position: relative, it messed with the offsetLeft and
+  offsetTop in ideabox javascript. Making this position: relative so
+  offsetParent now refers to a parent that has the same offset on the page
+  as does the canvas.*/
+  /*position: relative;*/
 }
 .toolbar {
   display: flex;
