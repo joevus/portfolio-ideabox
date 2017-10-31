@@ -61,8 +61,7 @@ with its grid intact but not with justify-items:center on it*/
   position: absolute;
   height: 100%;
   width: 100%;
-  background-color: #eee;
-  opacity: 0.98;
+  background-color: #cccccc;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,8 +69,8 @@ with its grid intact but not with justify-items:center on it*/
 }
 
 .intro-frame:hover {
-  background-color: #ddddee;
-  opacity: 0.8;
+  background-color: #ccdddd;
+  opacity: 0.85;
 }
 
 .intro-frame img {
