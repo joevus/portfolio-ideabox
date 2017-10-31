@@ -128,28 +128,30 @@ class IdeaboxContainer extends React.Component {
   handleIntroClick = () => {
     // For first click on canvas, if clicked anywhere besides "skip intro",
     // run introShow. Otherwise, skip intro.
+
+    const introFrame = document.getElementById("intro-frame");
+    let opac = window.getComputedStyle(introFrame).getPropertyValue("opacity");
+    let fadeId = setInterval(function(){
+      opac -= .1;
+
+      introFrame.style.opacity = opac;
+
+      if(opac <= 0) {
+        introFrame.style.display = "none";
+        clearInterval(fadeId);
+      }
+      // console.log("run fade");
+    }, 120);
+
+
     if(!this.introClicked){
       this.introShow();
     }
 
   }
 
-  paintIntroFrame = () => {
-    // What the canvas shows before it's clicked.
-    // setTimeout(function(){
-      let canvas = document.getElementById("ideaCanv");
-      let ctx = canvas.getContext("2d");
-
-      ctx.beginPath();
-      ctx.fillStyle = "#FF0000";
-      ctx.fillRect(0,0,canvas.width,canvas.height);
-    // }, 1);
-
-  }
-
   handleLoad = () => {
     // run things that need to run when component loads
-    this.paintIntroFrame();
   }
 
   componentDidMount = () => {
@@ -193,7 +195,7 @@ class IdeaboxContainer extends React.Component {
     return (
       <Ideabox handleClick={this.handleClick} handleMouseDown={this.handleMouseDown} handleMouseUp={this.handleMouseUp} handleMouseMove={this.handleMouseMove}
       handlePlus={this.handlePlus} handlePlay={this.handlePlay}
-      handleLoad={this.handleLoad} />
+      handleLoad={this.handleLoad} handleIntroClick={this.handleIntroClick} />
     );
   }
 }

@@ -61,16 +61,16 @@ with its grid intact but not with justify-items:center on it*/
   position: absolute;
   height: 100%;
   width: 100%;
-  background-color: #cccccc;
+  background-color: #bbbbbb;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 600ms, opacity 600ms;
+  transition: background-color 500ms ease-out, opacity 500ms ease-out;
 }
 
 .intro-frame:hover {
   background-color: #ccdddd;
-  opacity: 0.85;
+  opacity: 0.92;
 }
 
 .intro-frame img {

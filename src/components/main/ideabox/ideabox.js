@@ -43,7 +43,7 @@ class Ideabox extends React.Component {
   render() {
     return(
         <div className="cntr-on-small-plus main-top">
-          <div className="intro-frame">
+          <div id="intro-frame" onClick={this.props.handleIntroClick} className="intro-frame">
 
             <img src={playButton} alt="play button" />
             <h1>Idea</h1>
