@@ -164,26 +164,46 @@ class IdeaboxContainer extends React.Component {
     let canvas = document.getElementById("ideaCanv");
     let ctx = canvas.getContext("2d");
 
-    let hereGlowsStatic = () => {
-      let imgData = ctx.getImageData(0,0,canvas.width, canvas.height);
-      // length of data for one unit of canvas width
-      let dataRow = 4 * canvas.width;
 
-      for(let i = 0; i < imgData.data.length; i+=4) {
-        imgData.data[i], imgData.data[i + 1], imgData.data[i + 2] = 0;
+
+    let hereGlowsStatic = () => {
+
+
+      let makeAllPixelsBlack = () => {
+        let imgData = ctx.getImageData(0,0,canvas.width, canvas.height);
+        for(let i = 0; i < imgData.data.length; i+=4) {
+          imgData.data[i], imgData.data[i + 1], imgData.data[i + 2] = 0;
+        }
       }
-      function randomBlack() {
+
+      let staticAndFade = () => {
+        let imgData = ctx.getImageData(0,0,canvas.width, canvas.height);
+        if(staticCounter > 38 && alphaVal >= 15){
+          // decrease alpha value to make fade
+          alphaVal -= 15;
+        }
+        // make random pixels transparent or opaque
+        // fade alphaVal from opaque to transparent after
+        // staticCounter number of iterations
         for(let i = 3; i < imgData.data.length; i += 4) {
           if(Math.random() >= 0.5) {
             imgData.data[i] = 0;
           } else {
-            imgData.data[i] = 255;
+            imgData.data[i] = alphaVal;
           }
 
         }
         ctx.putImageData(imgData,0,0);
+        staticCounter++;
       }
-      return setInterval(randomBlack, 30);
+
+      // track how many times staticAndFade has run
+      let staticCounter = 0;
+      let alphaVal = 255;
+      // run once to start off counter
+      makeAllPixelsBlack();
+
+      return setInterval(staticAndFade, 30);
     }
 
     let writePutYour = () => {
@@ -204,15 +224,16 @@ class IdeaboxContainer extends React.Component {
     // start static
     setTimeout(function(){
       clearInterval(staticId)
-    }, 2600);
+    }, 3000);
     // pause for 1000, then write "Put your ideas in motion"
     setTimeout(function(){
       putYourId = writePutYour();
-    }, 3600);
+    }, 4000);
     // let "Put your..." run for 5000
     setTimeout(function(){
       clearInterval(putYourId);
-    }, 8600);
+    }, 9000);
+    // write "start with a drawing"
 
 
   } // end introShow
