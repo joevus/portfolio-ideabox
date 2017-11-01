@@ -201,11 +201,18 @@ class IdeaboxContainer extends React.Component {
 
     let staticId = hereGlowsStatic();
     let putYourId;
+    // start static
     setTimeout(function(){
       clearInterval(staticId)
-      putYourId = writePutYour();
-      setTimeout(function(){clearInterval(putYourId)}, 5600);
     }, 2600);
+    // pause for 1000, then write "Put your ideas in motion"
+    setTimeout(function(){
+      putYourId = writePutYour();
+    }, 3600);
+    // let "Put your..." run for 5000
+    setTimeout(function(){
+      clearInterval(putYourId);
+    }, 8600);
 
 
   } // end introShow
