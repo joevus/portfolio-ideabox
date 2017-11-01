@@ -141,7 +141,7 @@ class IdeaboxContainer extends React.Component {
         clearInterval(fadeId);
       }
       // console.log("run fade");
-    }, 120);
+    }, 80);
 
 
     if(!this.introClicked){
