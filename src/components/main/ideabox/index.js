@@ -178,7 +178,7 @@ class IdeaboxContainer extends React.Component {
 
       let staticAndFade = () => {
         let imgData = ctx.getImageData(0,0,canvas.width, canvas.height);
-        if(staticCounter > 38 && alphaVal >= 15){
+        if(staticCounter > 46 && alphaVal >= 15){
           // decrease alpha value to make fade
           alphaVal -= 15;
         }
