@@ -186,8 +186,27 @@ class IdeaboxContainer extends React.Component {
       return setInterval(randomBlack, 30);
     }
 
+    let writePutYour = () => {
+
+      ctx.font = "32px Georgia";
+      let str = "Put your ideas in motion";
+      let i = 0;
+      let drawText = () => {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.fillText(str.substr(0, i + 1), 100, 150);
+        i++;
+      }
+      return setInterval(drawText, 60);
+    }
+
     let staticId = hereGlowsStatic();
-    setTimeout(function(){clearInterval(staticId)}, 2600);
+    let putYourId;
+    setTimeout(function(){
+      clearInterval(staticId)
+      putYourId = writePutYour();
+      setTimeout(function(){clearInterval(putYourId)}, 5600);
+    }, 2600);
+
 
   } // end introShow
 
