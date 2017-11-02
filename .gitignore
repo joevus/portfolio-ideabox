@@ -9,6 +9,9 @@
 # production
 /build
 
+# media
+src/components/main/ideabox/images
+
 # misc
 .DS_Store
 .env.local

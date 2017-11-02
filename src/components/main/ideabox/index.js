@@ -4,6 +4,11 @@ import Ideabox from "./ideabox.js";
 import { connect } from "react-redux";
 import { click } from "../../../actions";
 
+import plusGif from "./images/click-plus-quality.gif";
+import playGif from "./images/push-play-quality.gif";
+import drawSmiley from "./images/draw-smiley-quality.gif";
+import drawSecondSmiley from "./images/draw-second-smiley-quality.gif";
+import animatedSmile from "./images/animated-smile-quality.gif";
 
 class IdeaboxContainer extends React.Component {
 
@@ -82,7 +87,6 @@ class IdeaboxContainer extends React.Component {
 
     let putLastShadowSketch = () => {
       let shadowLength = this.state.shadowSketches.length;
-      console.log(shadowLength);
       // do nothing if haven't added any frames
       if(shadowLength === 0) { return; }
       // otherwise display last shadow sketch
@@ -164,7 +168,9 @@ class IdeaboxContainer extends React.Component {
     let canvas = document.getElementById("ideaCanv");
     let ctx = canvas.getContext("2d");
 
-
+    let clearCanvas = () => {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+    }
 
     let hereGlowsStatic = () => {
 
@@ -206,10 +212,9 @@ class IdeaboxContainer extends React.Component {
       return setInterval(staticAndFade, 30);
     }
 
-    let writePutYour = () => {
+    let writeOnCanvas = (str) => {
 
       ctx.font = "32px Georgia";
-      let str = "Put your ideas in motion";
       let i = 0;
       let drawText = () => {
         ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -219,22 +224,39 @@ class IdeaboxContainer extends React.Component {
       return setInterval(drawText, 60);
     }
 
+    let placeImageOnCanvas = (src) => {
+      var img = new Image();
+      img.addEventListener("load", function(){
+        ctx.drawImage(img, 50, 50);
+      });
+      img.src = src;
+    }
+
     let staticId = hereGlowsStatic();
-    let putYourId;
+    let putYourId, startWithId;
     // start static
     setTimeout(function(){
       clearInterval(staticId)
     }, 3000);
     // pause for 1000, then write "Put your ideas in motion"
     setTimeout(function(){
-      putYourId = writePutYour();
+      putYourId = writeOnCanvas("Put your ideas in motion");
     }, 4000);
     // let "Put your..." run for 5000
     setTimeout(function(){
       clearInterval(putYourId);
+      clearCanvas();
     }, 9000);
-    // write "start with a drawing"
-
+    // After short delay, write "start with a drawing"
+    setTimeout(function(){
+      startWithId = writeOnCanvas("Start with a drawing");
+    }, 9500);
+    // Let "Start with" run for 4000
+    setTimeout(function() {
+      clearInterval(startWithId);
+      clearCanvas();
+      placeImageOnCanvas(drawSmiley);
+    }, 13500);
 
   } // end introShow
 
