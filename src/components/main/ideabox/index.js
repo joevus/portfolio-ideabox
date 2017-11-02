@@ -177,8 +177,7 @@ class IdeaboxContainer extends React.Component {
       ctx.clearRect(0,0,canvas.width,canvas.height);
     }
 
-    let hereGlowsStatic = () => {
-
+    let hereGlowsStatic = (segmentObj) => {
 
       let makeAllPixelsBlack = () => {
         let imgData = ctx.getImageData(0,0,canvas.width, canvas.height);
@@ -206,6 +205,16 @@ class IdeaboxContainer extends React.Component {
         }
         ctx.putImageData(imgData,0,0);
         staticCounter++;
+
+        if(alphaVal <= 0 || staticCounter > 70) {
+          // signal to sequencer that this function is done
+          // actionObj.finished = true;
+          segmentObj.finished = true;
+          return false;
+        } else {
+          return setTimeout(staticAndFade, 30);
+        }
+
       }
 
       // track how many times staticAndFade has run
@@ -213,11 +222,12 @@ class IdeaboxContainer extends React.Component {
       let alphaVal = 255;
       // run once to start off counter
       makeAllPixelsBlack();
-
-      return setInterval(staticAndFade, 30);
+      // start recursive static
+      staticAndFade();
     }
 
-    let writeOnCanvas = (str) => {
+    let writeOnCanvas = (segmentObj, str) => {
+
 
       ctx.font = "32px Georgia";
       let i = 0;
@@ -225,8 +235,16 @@ class IdeaboxContainer extends React.Component {
         ctx.clearRect(0,0,canvas.width,canvas.height);
         ctx.fillText(str.substr(0, i + 1), 100, 150);
         i++;
+        if(i > str.length){
+          // signal to sequencer that this action is finished
+          segmentObj.finished = true;
+          return false;
+        } else {
+          return setTimeout(drawText, 60);
+        }
       }
-      return setInterval(drawText, 60);
+      // start the chain reaction
+      drawText();
     }
 
     let placeImageOnCanvas = (src) => {
@@ -260,36 +278,132 @@ class IdeaboxContainer extends React.Component {
       ctx.drawImage(v, 0, 0, 320, 240);
       setTimeout(function(){drawVideoOnCanvas(v)}, 20);
     }
+    // class to construct show segments
+    class Segment {
+      constructor(waitTime){
+        this.waitTime = waitTime;
+        this.started = false;
+        this.finished = false;
+      }
+    }
+    // sub classes
+    class StaticSeg extends Segment{
+      action() {
+        hereGlowsStatic(this);
+      }
+    }
+    class WordsSeg extends Segment{
+      constructor(waitTime, str) {
+        super(waitTime);
+        this.str = str;
+
+      }
+      action() {
+        // bind so that the 'this' keyword refers to this WordsSeg obj we
+        // create
+        writeOnCanvas(this, this.str);
+      }
+    }
 
 
-    let staticId = hereGlowsStatic();
-    let putYourId, startWithId;
-    // start static
-    setTimeout(function(){
-      clearInterval(staticId)
-    }, 3000);
-    // pause for 1000, then write "Put your ideas in motion"
-    setTimeout(function(){
-      putYourId = writeOnCanvas("Put your ideas in motion");
-    }, 4000);
-    // let "Put your..." run for 5000
-    setTimeout(function(){
-      clearInterval(putYourId);
-      clearCanvas();
-    }, 9000);
-    // After short delay, write "start with a drawing"
-    setTimeout(function(){
-      startWithId = writeOnCanvas("Start with a drawing");
-    }, 9500);
-    // Let "Start with" run for 4000
-    setTimeout(function() {
-      clearInterval(startWithId);
-      clearCanvas();
-      // placeImageOnCanvas(drawSmiley);
-      let drawSmiley = createVideo(drawSmiley, drawSmileyOgg, "draw-smiley");
-      drawSmiley.play();
-      drawVideoOnCanvas(drawSmiley);
-    }, 13500);
+    // sequence index to track current action
+    let seqI = 0;
+    // sequence of events (actions) in intro show
+    let showSequence = [
+      new StaticSeg(0),
+      // {
+      //   action: function() {
+      //     console.log(this);
+      //     hereGlowsStatic(this);
+      //   },
+      //   // 0 wait time before starting first action
+      //   waitTime: 0,
+      //   started: false,
+      //   finished: false
+      // },
+      new WordsSeg(500, "Put your ideas in motion")
+      // {
+      //   action: function() {
+      //     writeOnCanvas("Put your ideas in motion");
+      //   },
+      //   waitTime: 500,
+      //   started: false,
+      //   finished: false
+      // }
+    ];
+
+    let sequencer = () => {
+      let currSeg = showSequence[seqI];
+
+      let currStarted = showSequence[seqI].started;
+      let currFinished = showSequence[seqI].finished;
+      let currWait = showSequence[seqI].waitTime;
+
+      // only runs one time per action object
+      if(!currStarted){
+        // if hasn't started, run action
+        setTimeout(()=>{currSeg.action()}, currWait);
+        // signal to sequencer that action started, this lexical block
+        // won't run next time.
+        showSequence[seqI].started = true;
+        // we're done with this iteration,
+        // fire up the sequencer again so it can do its job
+        return sequencer();
+      }
+
+      if (currFinished){
+        // if it has finished, bump seqI to next spot and re-run sequencer
+        // but if it is at the end, finish sequencer
+        seqI++;
+        if(seqI >= showSequence.length){
+          // end sequencer, show's over
+          return false;
+        } else{
+          return sequencer();
+        }
+
+      } else {
+        // current action hasn't finished, run sequencer again after a short
+        // wait.
+        return setTimeout(sequencer, 60);
+      }
+
+
+    }
+
+    // fire it up
+    sequencer();
+
+
+// Old way to sequence
+    // let staticId = hereGlowsStatic();
+    // let putYourId, startWithId;
+    // // start static
+    // setTimeout(function(){
+    //   clearInterval(staticId)
+    // }, 3000);
+    // // pause for 1000, then write "Put your ideas in motion"
+    // setTimeout(function(){
+    //   putYourId = writeOnCanvas("Put your ideas in motion");
+    // }, 4000);
+    // // let "Put your..." run for 5000
+    // setTimeout(function(){
+    //   clearInterval(putYourId);
+    //   clearCanvas();
+    // }, 9000);
+    // // After short delay, write "start with a drawing"
+    // setTimeout(function(){
+    //   startWithId = writeOnCanvas("Start with a drawing");
+    // }, 9500);
+    // // Let "Start with" run for 4000
+    // setTimeout(function() {
+    //   clearInterval(startWithId);
+    //   clearCanvas();
+    //   // placeImageOnCanvas(drawSmiley);
+    //   let drawSmiley = createVideo(drawSmiley, drawSmileyOgg, "draw-smiley");
+    //   drawSmiley.play();
+    //   drawVideoOnCanvas(drawSmiley);
+    // }, 13500);
 
   } // end introShow
 
