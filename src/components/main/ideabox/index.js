@@ -4,11 +4,16 @@ import Ideabox from "./ideabox.js";
 import { connect } from "react-redux";
 import { click } from "../../../actions";
 
-import plusGif from "./images/click-plus-quality.gif";
-import playGif from "./images/push-play-quality.gif";
-import drawSmiley from "./images/draw-smiley-quality.gif";
-import drawSecondSmiley from "./images/draw-second-smiley-quality.gif";
-import animatedSmile from "./images/animated-smile-quality.gif";
+import plusGif from "./images/click-plus-button.mp4";
+import plusGifOgg from "./images/click-plus-button.ogg";
+import playGif from "./images/click-play-button.mp4";
+import playGifOgg from "./images/click-play-button.ogg";
+import drawSmiley from "./images/draw-smiley.mp4";
+import drawSmileyOgg from "./images/draw-smiley.ogg";
+import drawSecondSmiley from "./images/draw-second-smiley.mp4";
+import drawSecondSmileyOgg from "./images/draw-second-smiley.ogg";
+import animatedSmile from "./images/animate-smiley.mp4";
+import animatedSmileOgg from "./images/animate-smiley.ogg";
 
 class IdeaboxContainer extends React.Component {
 
@@ -232,6 +237,31 @@ class IdeaboxContainer extends React.Component {
       img.src = src;
     }
 
+    let createVideo = (srcMP4, srcOGG, id) => {
+      let supportsVideoElement = !!document.createElement('video').canPlayType;
+      console.log("Does browser support video: " + supportsVideoElement);
+      let video = document.createElement("video");
+      video.id = id;
+      // create source elements
+      let sourceMP4 = document.createElement("source");
+      sourceMP4.type = "video/mp4";
+      sourceMP4.src = srcMP4;
+      let sourceOGG = document.createElement("source");
+      sourceOGG.type = "video/ogg";
+      sourceOGG.src = srcOGG;
+      video.appendChild(sourceMP4);
+      video.appendChild(sourceOGG);
+
+      return video;
+    }
+
+    let drawVideoOnCanvas = (v) => {
+      if(v.paused || v.ended) return false;
+      ctx.drawImage(v, 0, 0, 320, 240);
+      setTimeout(function(){drawVideoOnCanvas(v)}, 20);
+    }
+
+
     let staticId = hereGlowsStatic();
     let putYourId, startWithId;
     // start static
@@ -255,7 +285,10 @@ class IdeaboxContainer extends React.Component {
     setTimeout(function() {
       clearInterval(startWithId);
       clearCanvas();
-      placeImageOnCanvas(drawSmiley);
+      // placeImageOnCanvas(drawSmiley);
+      let drawSmiley = createVideo(drawSmiley, drawSmileyOgg, "draw-smiley");
+      drawSmiley.play();
+      drawVideoOnCanvas(drawSmiley);
     }, 13500);
 
   } // end introShow
