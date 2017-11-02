@@ -4,10 +4,10 @@ import Ideabox from "./ideabox.js";
 import { connect } from "react-redux";
 import { click } from "../../../actions";
 
-import plusGif from "./images/click-plus-button.mp4";
-import plusGifOgg from "./images/click-plus-button.ogg";
-import playGif from "./images/click-play-button.mp4";
-import playGifOgg from "./images/click-play-button.ogg";
+import clickPlus from "./images/click-plus-button.mp4";
+import clickPlusOgg from "./images/click-plus-button.ogg";
+import clickPlay from "./images/click-play-button.mp4";
+import clickPlayOgg from "./images/click-play-button.ogg";
 import drawSmiley from "./images/draw-smiley.mp4";
 import drawSmileyOgg from "./images/draw-smiley.ogg";
 import drawSecondSmiley from "./images/draw-second-smiley.mp4";
@@ -247,7 +247,6 @@ class IdeaboxContainer extends React.Component {
       drawText();
     }
 
-
     let createVideo = (srcMP4, srcOGG, id) => {
       let supportsVideoElement = !!document.createElement('video').canPlayType;
       console.log("Does browser support video: " + supportsVideoElement);
@@ -266,10 +265,13 @@ class IdeaboxContainer extends React.Component {
       return video;
     }
 
-    let drawVideoOnCanvas = (v) => {
-      if(v.paused || v.ended) return false;
+    let drawVideoOnCanvas = (segmentObj, v) => {
+      if(v.ended) {
+        segmentObj.finished = true;
+        return false;
+      }
       ctx.drawImage(v, 0, 0, 320, 240);
-      setTimeout(function(){drawVideoOnCanvas(v)}, 20);
+      setTimeout(function(){drawVideoOnCanvas(segmentObj, v)}, 20);
     }
     // class to construct show segments
     class Segment {
@@ -285,16 +287,30 @@ class IdeaboxContainer extends React.Component {
         hereGlowsStatic(this);
       }
     }
-    class WordsSeg extends Segment{
+    class WordsSeg extends Segment {
       constructor(waitTime, str) {
         super(waitTime);
         this.str = str;
 
       }
       action() {
-        // bind so that the 'this' keyword refers to this WordsSeg obj we
+        // pass keyword 'this' so that can refer to this WordsSeg obj we
         // create
         writeOnCanvas(this, this.str);
+      }
+    }
+    class VideoSeg extends Segment {
+      constructor(waitTime, srcMP4, srcOGG, id) {
+        super(waitTime);
+        this.srcMP4 = srcMP4;
+        this.srcOGG = srcOGG;
+        this.id = id;
+      }
+      action() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        let video = createVideo(this.srcMP4, this.srcOGG, this.id);
+        video.play();
+        drawVideoOnCanvas(this, video);
       }
     }
 
@@ -304,8 +320,30 @@ class IdeaboxContainer extends React.Component {
     // sequence of events (actions) in intro show
     let showSequence = [
       new StaticSeg(0),
-      new WordsSeg(500, "Put your ideas in motion")
+      new WordsSeg(500, "Put your ideas in motion"),
+      new WordsSeg(500, "start with a drawing"),
+      new VideoSeg(0, drawSmiley, drawSmileyOgg, "draw-smiley"),
+      new WordsSeg(500, "then click the plus button, it adds a frame"),
+      new VideoSeg(0, clickPlus, clickPlusOgg, "click-plus"),
+      new WordsSeg(500, "your first drawing becomes a shadow"),
+      new WordsSeg(0, "and you can start drawing your next frame"),
+      new VideoSeg(0, drawSecondSmiley, drawSecondSmileyOgg, "draw-sec-smiley"),
+      new WordsSeg(0, "after a few frames, press play to see the animation"),
+      new VideoSeg(0, clickPlay, clickPlayOgg, "click-play"),
+      new WordsSeg(0, "got it? Time to try it out!")
     ];
+
+    //
+    // import clickPlus from "./images/click-plus-button.mp4";
+    // import clickPlusOgg from "./images/click-plus-button.ogg";
+    // import clickPlay from "./images/click-play-button.mp4";
+    // import clickPlayOgg from "./images/click-play-button.ogg";
+    // import drawSmiley from "./images/draw-smiley.mp4";
+    // import drawSmileyOgg from "./images/draw-smiley.ogg";
+    // import drawSecondSmiley from "./images/draw-second-smiley.mp4";
+    // import drawSecondSmileyOgg from "./images/draw-second-smiley.ogg";
+    // import animatedSmile from "./images/animate-smiley.mp4";
+    // import animatedSmileOgg from "./images/animate-smiley.ogg";
 
     let sequencer = () => {
       let currSeg = showSequence[seqI];
