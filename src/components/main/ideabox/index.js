@@ -247,13 +247,6 @@ class IdeaboxContainer extends React.Component {
       drawText();
     }
 
-    let placeImageOnCanvas = (src) => {
-      var img = new Image();
-      img.addEventListener("load", function(){
-        ctx.drawImage(img, 50, 50);
-      });
-      img.src = src;
-    }
 
     let createVideo = (srcMP4, srcOGG, id) => {
       let supportsVideoElement = !!document.createElement('video').canPlayType;
@@ -311,25 +304,7 @@ class IdeaboxContainer extends React.Component {
     // sequence of events (actions) in intro show
     let showSequence = [
       new StaticSeg(0),
-      // {
-      //   action: function() {
-      //     console.log(this);
-      //     hereGlowsStatic(this);
-      //   },
-      //   // 0 wait time before starting first action
-      //   waitTime: 0,
-      //   started: false,
-      //   finished: false
-      // },
       new WordsSeg(500, "Put your ideas in motion")
-      // {
-      //   action: function() {
-      //     writeOnCanvas("Put your ideas in motion");
-      //   },
-      //   waitTime: 500,
-      //   started: false,
-      //   finished: false
-      // }
     ];
 
     let sequencer = () => {
@@ -373,37 +348,6 @@ class IdeaboxContainer extends React.Component {
 
     // fire it up
     sequencer();
-
-
-// Old way to sequence
-    // let staticId = hereGlowsStatic();
-    // let putYourId, startWithId;
-    // // start static
-    // setTimeout(function(){
-    //   clearInterval(staticId)
-    // }, 3000);
-    // // pause for 1000, then write "Put your ideas in motion"
-    // setTimeout(function(){
-    //   putYourId = writeOnCanvas("Put your ideas in motion");
-    // }, 4000);
-    // // let "Put your..." run for 5000
-    // setTimeout(function(){
-    //   clearInterval(putYourId);
-    //   clearCanvas();
-    // }, 9000);
-    // // After short delay, write "start with a drawing"
-    // setTimeout(function(){
-    //   startWithId = writeOnCanvas("Start with a drawing");
-    // }, 9500);
-    // // Let "Start with" run for 4000
-    // setTimeout(function() {
-    //   clearInterval(startWithId);
-    //   clearCanvas();
-    //   // placeImageOnCanvas(drawSmiley);
-    //   let drawSmiley = createVideo(drawSmiley, drawSmileyOgg, "draw-smiley");
-    //   drawSmiley.play();
-    //   drawVideoOnCanvas(drawSmiley);
-    // }, 13500);
 
   } // end introShow
 
