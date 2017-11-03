@@ -53,7 +53,9 @@ class Ideabox extends React.Component {
           </div>
           <div className="canvas-and-toolbar-cont">
             <div id="canvas-container">
-              <canvas ref="canvas" id="ideaCanv" width={this.state.canvasWidth + "px"} height="400px" onClick={this.props.handleClick} onMouseDown={this.props.handleMouseDown} onMouseUp={this.props.handleMouseUp} onMouseMove={this.props.handleMouseMove}></canvas>
+              <canvas ref="canvas" id="ideaCanv" width={this.state.canvasWidth + "px"} height="400px" onClick={this.props.handleClick} onMouseDown={this.props.handleMouseDown} onMouseUp={this.props.handleMouseUp} onMouseMove={this.props.handleMouseMove}
+              onTouchStart={this.props.handleTouchStart}
+              onTouchMove={this.props.handleTouchMove}></canvas>
             </div>
 
             <div className="toolbar">

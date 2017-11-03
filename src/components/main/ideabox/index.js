@@ -123,6 +123,7 @@ class IdeaboxContainer extends React.Component {
 // When button down and mouse moving moves, draw small rectangles at cursor
 // location.
   handleMouseMove = (e) => {
+    e.preventDefault();
     if(this.isMouseDown) {
       var X = e.pageX - e.target.offsetLeft;
       // offsetParent because the parent is position:relative
@@ -132,6 +133,29 @@ class IdeaboxContainer extends React.Component {
       this.ctx.fillStyle = 'rgb(20,20,20)';
       this.ctx.fill();
     }
+  }
+// disable scrolling when touching canvas
+  handleTouchStart = (e) => {
+    e.preventDefault();
+    this.ctx = this.props.context;
+    var X = e.touches[0].pageX - e.target.offsetLeft;
+    // offsetParent because the parent is position:relative
+    var Y = e.touches[0].pageY - e.target.offsetParent.offsetTop;
+    this.ctx.beginPath();
+    this.ctx.arc(X, Y, 8, 0, Math.PI * 2);
+    this.ctx.fillStyle = 'rgb(20,20,20)';
+    this.ctx.fill();
+  }
+
+  handleTouchMove = (e) => {
+    e.preventDefault();
+    var X = e.touches[0].pageX - e.target.offsetLeft;
+    // offsetParent because the parent is position:relative
+    var Y = e.touches[0].pageY - e.target.offsetParent.offsetTop;
+    this.ctx.beginPath();
+    this.ctx.arc(X, Y, 8, 0, Math.PI * 2);
+    this.ctx.fillStyle = 'rgb(20,20,20)';
+    this.ctx.fill();
   }
 
   handleIntroClick = () => {
@@ -401,7 +425,9 @@ class IdeaboxContainer extends React.Component {
     return (
       <Ideabox handleClick={this.handleClick} handleMouseDown={this.handleMouseDown} handleMouseUp={this.handleMouseUp} handleMouseMove={this.handleMouseMove}
       handlePlus={this.handlePlus} handlePlay={this.handlePlay}
-      handleLoad={this.handleLoad} handleIntroClick={this.handleIntroClick} />
+      handleLoad={this.handleLoad} handleIntroClick={this.handleIntroClick}
+      handleTouchStart={this.handleTouchStart}
+      handleTouchMove={this.handleTouchMove} />
     );
   }
 }
