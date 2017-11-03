@@ -136,6 +136,7 @@ with its grid intact but not with justify-items:center on it*/
 
 
 #canvas-container {
+  overflow: hidden;
   grid-column: 1/2;
 }
 .toolbar {
