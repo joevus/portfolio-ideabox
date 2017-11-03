@@ -313,6 +313,11 @@ class IdeaboxContainer extends React.Component {
         drawVideoOnCanvas(this, video);
       }
     }
+    class ClearSeg extends Segment {
+      action () {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+      }
+    }
 
 
     // sequence index to track current action
@@ -320,17 +325,20 @@ class IdeaboxContainer extends React.Component {
     // sequence of events (actions) in intro show
     let showSequence = [
       new StaticSeg(0),
-      new WordsSeg(500, "Put your ideas in motion"),
-      new WordsSeg(500, "start with a drawing"),
-      new VideoSeg(0, drawSmiley, drawSmileyOgg, "draw-smiley"),
-      new WordsSeg(500, "then click the plus button, it adds a frame"),
-      new VideoSeg(0, clickPlus, clickPlusOgg, "click-plus"),
-      new WordsSeg(500, "your first drawing becomes a shadow"),
-      new WordsSeg(0, "and you can start drawing your next frame"),
-      new VideoSeg(0, drawSecondSmiley, drawSecondSmileyOgg, "draw-sec-smiley"),
-      new WordsSeg(0, "after a few frames, press play to see the animation"),
-      new VideoSeg(0, clickPlay, clickPlayOgg, "click-play"),
-      new WordsSeg(0, "got it? Time to try it out!")
+      new WordsSeg(0, "Put your ideas in motion"),
+      new WordsSeg(800, "start with a drawing"),
+      new VideoSeg(800, drawSmiley, drawSmileyOgg, "draw-smiley"),
+      new WordsSeg(0, "then click the plus button, it adds a frame"),
+      new VideoSeg(800, clickPlus, clickPlusOgg, "click-plus"),
+      new WordsSeg(0, "your first drawing becomes a shadow"),
+      new WordsSeg(800, "and you can start drawing your next frame"),
+      new VideoSeg(800, drawSecondSmiley, drawSecondSmileyOgg, "draw-sec-smiley"),
+      new WordsSeg(0, "after a few frames,"),
+      new WordsSeg(800, "press play to see the animation"),
+      new VideoSeg(800, clickPlay, clickPlayOgg, "click-play"),
+      new VideoSeg(0, animatedSmile, animatedSmileOgg, "animated-smile"),
+      new WordsSeg(0, "Time to try it out!"),
+      new ClearSeg(800)
     ];
 
     //
