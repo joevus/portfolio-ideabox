@@ -154,7 +154,7 @@ class IdeaboxContainer extends React.Component {
     var Y = e.touches[0].pageY - e.target.offsetParent.offsetTop;
     this.ctx.beginPath();
     this.ctx.arc(X, Y, 8, 0, Math.PI * 2);
-    this.ctx.fillStyle = 'rgb(20,20,20)';
+    // this.ctx.fillStyle = 'rgb(20,20,20)';
     this.ctx.fill();
   }
 

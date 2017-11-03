@@ -16,8 +16,27 @@ class Ideabox extends React.Component {
   }
 
   updateDimensions() {
+    // update width of canvas
     let canvasWidth = document.getElementById('canvas-container').offsetWidth;
     this.setState({canvasWidth});
+
+    // update height of canvas for mobile
+    if(window.innerWidth < 768) {
+      if(window.innerWidth > window.innerHeight){
+        // for landscape mode
+        // set canvas height as window height, disregarding toolbars
+        let canvasHeight = window.outerHeight;
+        this.setState({canvasHeight});
+      } else {
+        // for portrait mode
+        // make canvas as tall as screen is wide. This way, the canvas won't
+        // be taller than the screen when shifted to landscape mode.
+        let canvasHeight = window.innerWidth;
+        this.setState({canvasHeight});
+      }
+
+    }
+    // let canvasHeight =
     // if updateDimension gets called again (like on a resize event)
     // retrieve canvas ctx and store it.
     var ctx = this.refs.canvas.getContext('2d');
@@ -53,8 +72,8 @@ class Ideabox extends React.Component {
           </div>
           <div className="canvas-and-toolbar-cont">
             <div id="canvas-container">
-              <canvas ref="canvas" id="ideaCanv" width={this.state.canvasWidth + "px"} height="400px" onClick={this.props.handleClick} onMouseDown={this.props.handleMouseDown} onMouseUp={this.props.handleMouseUp} onMouseMove={this.props.handleMouseMove}
-              onTouchStart={this.props.handleTouchStart}
+              <canvas ref="canvas" id="ideaCanv" width={this.state.canvasWidth + "px"}
+              height={this.state.canvasHeight + "px"} onClick={this.props.handleClick} onMouseDown={this.props.handleMouseDown} onMouseUp={this.props.handleMouseUp} onMouseMove={this.props.handleMouseMove} onTouchStart={this.props.handleTouchStart}
               onTouchMove={this.props.handleTouchMove}></canvas>
             </div>
 
