@@ -1,4 +1,6 @@
 *, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: inherit;
 }
 html, body {
@@ -101,7 +103,7 @@ with its grid intact but not with justify-items:center on it*/
 }
 
 
-/*small screens*/
+/*small screens and larger*/
 @media (min-width: 768px){
   .canvas-and-toolbar-cont{
     display: grid;
@@ -125,8 +127,12 @@ with its grid intact but not with justify-items:center on it*/
     margin-bottom: 8px;
     font-size: 3em;
   }
+  #canvas-container {
+    border: solid #333 1px;
+    border-radius: 3px;
+  }
 }
-/* medium screens*/
+/* medium screens and larger*/
 @media (min-width: 992px){
   .canvas-and-toolbar-cont{
     display: grid;
@@ -138,14 +144,15 @@ with its grid intact but not with justify-items:center on it*/
 #canvas-container {
   overflow: hidden;
   grid-column: 1/2;
+  border-bottom: solid #333 1px;
+  border-top: solid #333 1px;
+  border-radius: 3px;
 }
 .toolbar {
   grid-column: 2/3;
   vertical-align: middle;
 }
 #ideaCanv {
-  border: solid #333 1px;
-  border-radius: 3px;
   touch-action: none;
 }
 .simpleCntr {
