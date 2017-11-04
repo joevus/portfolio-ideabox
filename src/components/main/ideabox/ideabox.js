@@ -35,12 +35,77 @@ class Ideabox extends React.Component {
         this.setState({canvasHeight});
       }
 
+    } else {
+      // if not mobile make height 400px
+      let canvasHeight = 400;
+      this.setState({canvasHeight});
     }
     // let canvasHeight =
     // if updateDimension gets called again (like on a resize event)
     // retrieve canvas ctx and store it.
     var ctx = this.refs.canvas.getContext('2d');
     this.props.storeCanvasCtxt(ctx);
+  }
+
+  setToolbarPlacement() {
+
+    checkMobileOrientationAndSetToolbar();
+
+    // throttle resize event as it fires at a quick rate and we are
+    // reorganizing the DOM
+    (function() {
+      window.addEventListener("resize", resizeThrottler, false);
+
+      var resizeTimeout;
+      function resizeThrottler() {
+        // ignore resize events as long as an actualResizeHandler execution is in
+        // the queue
+        if(!resizeTimeout) {
+          resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+
+            // The actualResizeHandler will execute at a rate of 15fps
+          }, 66);
+        }
+      }
+
+      function actualResizeHandler() {
+        checkMobileOrientationAndSetToolbar();
+      }
+    }());
+
+
+    // Check if mobile size and whether portrait or landscape. Set screen size
+    // accordingly.
+
+    function checkMobileOrientationAndSetToolbar() {
+      // .canvas-and-toolbar-cont{
+      //   display: grid;
+      //   grid-template-columns: 540px 84px;
+      // }
+      if(window.innerWidth < 768) {
+        var canvasAndTools = document.getElementsByClassName("canvas-and-toolbar-cont")[0];
+        if(window.innerWidth < window.innerHeight) {
+          // portrait orientation
+          if(canvasAndTools.style.display) {
+            // remove display: grid by checking if there's a display inline
+            // style and removing it
+            if (canvasAndTools.style.removeProperty) {
+                canvasAndTools.style.removeProperty('display');
+            } else {
+              // for ie 9
+                canvasAndTools.style.removeAttribute('grid-template-columns');
+            }
+          }
+
+        } else {
+          // landscape mode
+          canvasAndTools.style.display = "grid";
+          canvasAndTools.style.gridTemplateColumns = "90% 10%";
+        }
+      }
+    }
   }
 
   componentWillMount() {
@@ -51,9 +116,8 @@ class Ideabox extends React.Component {
     // put update dimensions here so that scrollbars have time to appear and
     // will be taken into account for the width
     this.updateDimensions();
-    // run things that need to laod when component mounts.
-    // - paintIntroFrame
-    // this.props.handleLoad();
+    this.setToolbarPlacement();
+
 
     var ctx = this.refs.canvas.getContext('2d');
     this.props.storeCanvasCtxt(ctx);
