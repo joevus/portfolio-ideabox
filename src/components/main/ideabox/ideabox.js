@@ -87,21 +87,15 @@ class Ideabox extends React.Component {
       if(window.innerWidth < 768) {
         let canvasAndTools = document.getElementsByClassName("canvas-and-toolbar-cont")[0];
         let toolbar = document.getElementsByClassName("toolbar")[0];
+        let canvasCont = document.getElementById("canvas-container");
         if(window.innerWidth < window.innerHeight) {
           // portrait orientation
           if(canvasAndTools.style.display) {
             // remove display: grid by checking if there's a display inline
-            // style and removing it
-            if (canvasAndTools.style.removeProperty) {
-              canvasAndTools.style.removeProperty('display');
-              canvasAndTools.style.removeProperty('grid-template-columns');
-              toolbar.style.removeProperty('flex-direction');
-            } else {
-              // for ie 9
-              canvasAndTools.style.removeProperty('display');
-              canvasAndTools.style.removeAttribute('grid-template-columns');
-              toolbar.style.removeAttribute('flex-direction');
-            }
+            // style and removing all in-line styles.
+              canvasAndTools.removeAttribute('style');
+              toolbar.removeAttribute('style');
+              canvasCont.removeAttribute('style');
           }
 
         } else {
@@ -109,6 +103,7 @@ class Ideabox extends React.Component {
           canvasAndTools.style.display = "grid";
           canvasAndTools.style.gridTemplateColumns = "90% 10%";
           toolbar.style.flexDirection = "column";
+          canvasCont.style.border = "solid #333 1px";
         }
       }
     }
