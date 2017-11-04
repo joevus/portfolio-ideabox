@@ -16,8 +16,16 @@ class Ideabox extends React.Component {
   }
 
   updateDimensions() {
+    let canvasWidth;
     // update width of canvas
-    let canvasWidth = document.getElementById('canvas-container').offsetWidth;
+    if(window.innerWidth < 768 && (window.innerWidth < window.innerHeight)){
+      // for mobile portrait make canvas as wide as would be in landscape
+      canvasWidth = .9 * window.outerHeight;
+    } else {
+      // for all other screen situations, make it fit canvas-container
+      canvasWidth = document.getElementById('canvas-container').offsetWidth;
+    }
+
     this.setState({canvasWidth});
 
     // update height of canvas for mobile
