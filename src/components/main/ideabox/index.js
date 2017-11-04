@@ -253,18 +253,42 @@ class IdeaboxContainer extends React.Component {
     let writeOnCanvas = (segmentObj, str) => {
       let leftMargin = 50;
       let topMargin = 200;
+      let breakPoint;
+      // make changes for mobile
       if(window.innerWidth < 768) {
         ctx.font = "24px Georgia";
         leftMargin = 15;
         topMargin = 125;
+        // find break in words after 28 characters, only portrait mode
+        if(window.innerWidth < window.innerHeight){
+          breakPoint = str.indexOf(' ', 20);
+          console.log("breakpoint found: " + breakPoint);
+        }
       } else {
         ctx.font = "32px Georgia";
       }
 
       let i = 0;
+      let h = 0;
       let drawText = () => {
         ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.fillText(str.substr(0, i + 1), leftMargin, topMargin);
+        // if breakPoint exists (not -1) and is reached, make two lines of text
+        if(breakPoint > 0) {
+          // write every time (if breakPoint exists)
+          ctx.fillText(str.substr(0, h + 1), leftMargin, topMargin);
+          // only increment this charcter if not to breakPoint
+          if(i < breakPoint){ h++ };
+          // write second line too, but only when breakPoint reached
+          if(i > breakPoint){
+            // characters after breakPoint to print out
+            let numChars = i - breakPoint + 1;
+            ctx.fillText(str.substr(breakPoint + 1, numChars), leftMargin, topMargin + 43);
+          }
+        } else {
+          // no breakPoint, all on one line
+          ctx.fillText(str.substr(0, i + 1), leftMargin, topMargin);
+        }
+
         i++;
         if(i > str.length){
           // signal to sequencer that this action is finished
