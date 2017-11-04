@@ -212,7 +212,7 @@ class IdeaboxContainer extends React.Component {
 
       let staticAndFade = () => {
         let imgData = ctx.getImageData(0,0,canvas.width, canvas.height);
-        if(staticCounter > 46 && alphaVal >= 15){
+        if(staticCounter > 26 && alphaVal >= 15){
           // decrease alpha value to make fade
           alphaVal -= 15;
         }
@@ -230,13 +230,13 @@ class IdeaboxContainer extends React.Component {
         ctx.putImageData(imgData,0,0);
         staticCounter++;
 
-        if(alphaVal <= 0 || staticCounter > 70) {
+        if(alphaVal <= 0 || staticCounter > 50) {
           // signal to sequencer that this function is done
           // actionObj.finished = true;
           segmentObj.finished = true;
           return false;
         } else {
-          return setTimeout(staticAndFade, 30);
+          return setTimeout(staticAndFade, 66);
         }
 
       }
@@ -251,20 +251,27 @@ class IdeaboxContainer extends React.Component {
     }
 
     let writeOnCanvas = (segmentObj, str) => {
+      let leftMargin = 50;
+      let topMargin = 200;
+      if(window.innerWidth < 768) {
+        ctx.font = "24px Georgia";
+        leftMargin = 15;
+        topMargin = 125;
+      } else {
+        ctx.font = "32px Georgia";
+      }
 
-
-      ctx.font = "32px Georgia";
       let i = 0;
       let drawText = () => {
         ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.fillText(str.substr(0, i + 1), 100, 150);
+        ctx.fillText(str.substr(0, i + 1), leftMargin, topMargin);
         i++;
         if(i > str.length){
           // signal to sequencer that this action is finished
           segmentObj.finished = true;
           return false;
         } else {
-          return setTimeout(drawText, 60);
+          return setTimeout(drawText, 66);
         }
       }
       // start the chain reaction
