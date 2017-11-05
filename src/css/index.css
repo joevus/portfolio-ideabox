@@ -13,19 +13,30 @@ html {
 }
 
 .navbar {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  background: #55aa77;
+  color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #559999;
+  border-bottom: solid #446666 3px;
 }
 
 .brand {
-  /* take up the rest of remaining space */
-  flex: 1;
+  margin-left: 25px;
+}
+
+.nav-right {
+  justify-self: end;
+  margin-right: 30px;
+}
+
+.nav-right a {
+  margin-left: 60px;
+  text-decoration: none;
+  color: white;
 }
 
 .navbar div {
-  padding: 20px;
+  padding: 22px;
 }
 
 /* for mobile */
