@@ -320,13 +320,34 @@ class IdeaboxContainer extends React.Component {
       return video;
     }
 
-    let drawVideoOnCanvas = (segmentObj, v) => {
-      if(v.ended) {
-        segmentObj.finished = true;
-        return false;
+    let showVideoOnCanvas = (segmentObj, v) => {
+      let x;
+      let y;
+      if(window.innerWidth < 768){
+        if(window.innerWidth < window.innerHeight){
+          // position of video for portrait mobile
+          x = 30;
+          y = 35;
+        } else {
+          // position in landscape mobile
+          x = 125;
+          y = 40;
+        }
+
+      } else {
+        // position for every other screen type
+        x = 250;
+        y = 60;
       }
-      ctx.drawImage(v, 0, 0, 320, 240);
-      setTimeout(function(){drawVideoOnCanvas(segmentObj, v)}, 20);
+      let drawVideo = () => {
+        if(v.ended) {
+          segmentObj.finished = true;
+          return false;
+        }
+        ctx.drawImage(v, x, y, 320, 240);
+        setTimeout(function(){drawVideo(segmentObj, v)}, 20);
+      }
+      drawVideo();
     }
     // class to construct show segments
     class Segment {
@@ -365,7 +386,7 @@ class IdeaboxContainer extends React.Component {
         ctx.clearRect(0,0,canvas.width,canvas.height);
         let video = createVideo(this.srcMP4, this.srcOGG, this.id);
         video.play();
-        drawVideoOnCanvas(this, video);
+        showVideoOnCanvas(this, video);
       }
     }
     class ClearSeg extends Segment {
