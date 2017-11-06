@@ -24,15 +24,27 @@ p {
   font-size: 14pt;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
 .navbar {
   color: white;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   background: #559999;
   border-bottom: solid #446666 3px;
-  /*font-size: 16pt;*/
 }
 .navbar a {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   font-size: 16pt;
   text-decoration: none;
   color: white;
@@ -44,38 +56,63 @@ p {
   margin-left: 25px;
 }
 
-.nav-right {
-  justify-self: end;
-  margin-right: 30px;
+.navbar-collapse {
+  border-top: solid #446666 1px;
 }
 
-.nav-right a {
-  margin-left: 60px;
 
+
+.navbar ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 7.5px -15px;
+  margin-left: 25px;
 }
 
-.navbar div {
-  padding: 22px;
+.navbar-collapse li, .navbar-collapse a {
+  display: block;
 }
 
-/* for mobile */
-@media(max-width: 650px) {
+.navbar .icon-bar {
+  background-color: #aaa;
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+}
+
+.navbar .icon-bar + .icon-bar {
+  margin-top: 4px;
+}
+
+.navbar-toggle {
+  padding: 9px 10px;
+  margin-top: 8px;
+  margin-right: 15px;
+  margin-bottom: 8px;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid #eeffff;
+  border-radius: 4px;
+}
+
+/* for larger than mobile */
+@media (min-width: 768px){
   .navbar {
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
-  .brand {
-    width: 100%;
-    margin: 15px 0 10px 15px;
-
+  .navbar-collapse {
+    justify-self: end;
+    margin-right: 30px;
   }
-  .navLink {
-    width: 100%;
-    margin-left: 15px;
-  }
-  .navbar div {
-    padding: 10px;
+  .navbar ul {
+    margin-top: 0;
+    margint-bottom: 0;
+    display: inline-block;
   }
 }
+
 
 /*Idea Box*/
 
