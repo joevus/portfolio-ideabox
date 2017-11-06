@@ -253,10 +253,11 @@ class IdeaboxContainer extends React.Component {
     let writeOnCanvas = (segmentObj, str) => {
       let leftMargin = 50;
       let topMargin = 200;
+      // let canvFont =
       let breakPoint;
       // make changes for mobile
       if(window.innerWidth < 768) {
-        ctx.font = "24px Georgia";
+        ctx.font = "24px Roboto";
         leftMargin = 15;
         topMargin = 125;
         // find break in words after 28 characters, only portrait mode
@@ -265,7 +266,7 @@ class IdeaboxContainer extends React.Component {
           console.log("breakpoint found: " + breakPoint);
         }
       } else {
-        ctx.font = "32px Georgia";
+        ctx.font = "32px Roboto";
       }
 
       let i = 0;
