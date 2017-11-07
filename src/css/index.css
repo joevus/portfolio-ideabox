@@ -64,6 +64,7 @@ p {
 
 .navbar-collapse {
   border-top: solid #446666 1px;
+  transition: height 500ms ease;
 }
 
 .navbar ul {
