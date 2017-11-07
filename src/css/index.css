@@ -52,21 +52,26 @@ p {
 .navbar a:hover {
   color: #bbcdcd;
 }
-.brand {
-  margin-left: 25px;
+
+.navbar-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar .brand {
+  margin-left: 15px;
 }
 
 .navbar-collapse {
   border-top: solid #446666 1px;
 }
 
-
-
 .navbar ul {
   list-style: none;
   padding-left: 0;
-  margin: 7.5px -15px;
-  margin-left: 25px;
+  margin-top: 7.5px;
+  margin-bottom: 7.5px;
+  margin-left: 15px;
 }
 
 .navbar-collapse li, .navbar-collapse a {
@@ -105,11 +110,18 @@ p {
   .navbar-collapse {
     justify-self: end;
     margin-right: 30px;
+    border-top: none;
   }
   .navbar ul {
     margin-top: 0;
     margint-bottom: 0;
     display: inline-block;
+  }
+  .navbar-collapse li, .navbar-collapse a {
+    display: inline-block;
+  }
+  .navbar-toggle {
+    display: none;
   }
 }
 
