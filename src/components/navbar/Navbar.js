@@ -1,4 +1,5 @@
 import React from "react";
+import NavCollapse from "./NavCollapse";
 
 class Navbar extends React.Component {
   render() {
@@ -13,13 +14,7 @@ class Navbar extends React.Component {
             <span className="icon-bar"></span>
           </button>
         </div>
-
-        <div className="navbar-collapse">
-          <ul>
-            <li><a className="navLink" href="#">Home</a></li>
-            <li><a className="navLink" href="#">About</a></li>
-          </ul>
-        </div>
+        <NavCollapse />
       </nav>
     )
   }
