@@ -4,7 +4,7 @@ class Navbar extends React.Component {
 
   componentDidMount() {
     this.props.setNavCollScrollHeight(this.navbarCollapse);
-    this.props.setNavCollStyleTrans(this.navbarCollapse);
+    // this.props.setNavCollStyleTrans(this.navbarCollapse);
   }
 
   render() {

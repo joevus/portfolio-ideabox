@@ -8,8 +8,7 @@ class NavbarContainer extends React.Component {
     this.state = {
       collapsed: true,
       height: 0,
-      navCollScrollHeight: null,
-      navCollStyleTrans: ''
+      navCollScrollHeight: null
     }
   }
 
@@ -20,12 +19,12 @@ class NavbarContainer extends React.Component {
     });
   }
 
-  setNavCollStyleTrans = (ele) => {
-    let str = ele.style.transition;
-    this.setState({
-      navCollStyleTrans: str
-    });
-  }
+  // setNavCollStyleTrans = (ele) => {
+  //   let str = ele.style.transition;
+  //   this.setState({
+  //     navCollStyleTrans: str
+  //   });
+  // }
 
   handleButtClick = () => {
     console.log(this.refs);
@@ -40,6 +39,9 @@ class NavbarContainer extends React.Component {
     // reference to this
     let self = this;
     // much of this code came from css tricks
+    // https://css-tricks.com/using-css-transitions-auto-dimensions/
+    // simplified it, but may come back to it to see if it helps
+
     // get height of element's content, regardless of actual size
     let elHeight = this.state.navCollScrollHeight;
     // diable css transitions temporarily
@@ -100,8 +102,7 @@ class NavbarContainer extends React.Component {
     return(
       <Navbar height={this.state.height} collapsed={this.state.collapsed}
       handleButtClick={this.handleButtClick}
-      setNavCollScrollHeight={this.setNavCollScrollHeight}
-      setNavCollStyleTrans={this.setNavCollStyleTrans} />
+      setNavCollScrollHeight={this.setNavCollScrollHeight} />
     );
   }
 }
