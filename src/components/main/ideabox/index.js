@@ -176,11 +176,6 @@ class IdeaboxContainer extends React.Component {
       // console.log("run fade");
     }, 80);
 
-
-    if(!this.introClicked){
-      this.introShow();
-    }
-
   }
 
   handleLoad = () => {
