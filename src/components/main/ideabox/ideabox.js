@@ -137,11 +137,8 @@ class Ideabox extends React.Component {
         <div className="cntr-on-small-plus main-top">
           <div id="intro-frame" onClick={this.props.handleIntroClick} className="intro-frame">
 
-            <img src={playButton} alt="play button" />
-            <h1>Idea</h1>
-            <h1>Box</h1>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Ds2V-qevAZ0" frameborder="0" allowfullscreen></iframe>
 
-            {/* <h1>Box</h1>*/}
           </div>
           <div className="canvas-and-toolbar-cont">
             <div id="canvas-container">
