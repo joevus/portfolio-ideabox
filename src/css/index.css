@@ -213,7 +213,7 @@ with its grid intact but not with justify-items:center on it*/
 
 /*for mobile screens*/
 .canvas-and-toolbar-cont{
-  padding-top: 50px;
+  padding-top: 100px;
   /*display: grid;
   grid-template-columns: 80% 20%;*/
   /*when made main-top position: relative, it messed with the offsetLeft and

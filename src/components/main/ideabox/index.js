@@ -127,7 +127,8 @@ class IdeaboxContainer extends React.Component {
     if(this.isMouseDown) {
       var X = e.pageX - e.target.offsetLeft;
       // offsetParent because the parent is position:relative
-      var Y = e.pageY - e.target.offsetParent.offsetTop;
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      var Y = e.pageY - e.target.getBoundingClientRect().top - scrollTop;
       this.ctx.beginPath();
       this.ctx.arc(X, Y, 8, 0, Math.PI * 2);
       this.ctx.fillStyle = 'rgb(20,20,20)';
@@ -139,8 +140,8 @@ class IdeaboxContainer extends React.Component {
     e.preventDefault();
     this.ctx = this.props.context;
     var X = e.touches[0].pageX - e.target.offsetLeft;
-    // offsetParent because the parent is position:relative
-    var Y = e.touches[0].pageY - e.target.offsetParent.offsetTop;
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    var Y = e.touches[0].pageY - e.target.getBoundingClientRect().top - scrollTop;
     this.ctx.beginPath();
     this.ctx.arc(X, Y, 8, 0, Math.PI * 2);
     this.ctx.fillStyle = 'rgb(20,20,20)';
@@ -150,8 +151,8 @@ class IdeaboxContainer extends React.Component {
   handleTouchMove = (e) => {
     e.preventDefault();
     var X = e.touches[0].pageX - e.target.offsetLeft;
-    // offsetParent because the parent is position:relative
-    var Y = e.touches[0].pageY - e.target.offsetParent.offsetTop;
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    var Y = e.touches[0].pageY - e.target.getBoundingClientRect().top - scrollTop;
     this.ctx.beginPath();
     this.ctx.arc(X, Y, 8, 0, Math.PI * 2);
     // this.ctx.fillStyle = 'rgb(20,20,20)';

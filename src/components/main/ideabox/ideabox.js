@@ -160,6 +160,7 @@ class Ideabox extends React.Component {
               <button><i className="fa fa-eraser fa-fw"></i></button> */}
             </div>
           </div>
+
         </div>
     );
   }
