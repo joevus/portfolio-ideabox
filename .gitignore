@@ -10,7 +10,7 @@
 /build
 
 # media
-#src/components/main/ideabox/images
+src/components/main/ideabox/images
 
 # misc
 .DS_Store
