@@ -195,6 +195,8 @@ class IdeaboxContainer extends React.Component {
   introShow = () => {
     // get image data and canvas element
     let canvas = document.getElementById("ideaCanv");
+    let canvasContWidth = document.getElementById('canvas-container').offsetWidth;
+    alert(canvasContWidth);
     let ctx = canvas.getContext("2d");
 
     let clearCanvas = () => {
@@ -204,14 +206,14 @@ class IdeaboxContainer extends React.Component {
     let hereGlowsStatic = (segmentObj) => {
 
       let makeAllPixelsBlack = () => {
-        let imgData = ctx.getImageData(0,0,canvas.width, canvas.height);
+        let imgData = ctx.getImageData(0,0,canvasContWidth, canvas.height);
         for(let i = 0; i < imgData.data.length; i+=4) {
           imgData.data[i], imgData.data[i + 1], imgData.data[i + 2] = 0;
         }
       }
 
       let staticAndFade = () => {
-        let imgData = ctx.getImageData(0,0,canvas.width, canvas.height);
+        let imgData = ctx.getImageData(0,0,canvasContWidth, canvas.height);
         if(staticCounter > 26 && alphaVal >= 15){
           // decrease alpha value to make fade
           alphaVal -= 15;
@@ -386,6 +388,7 @@ class IdeaboxContainer extends React.Component {
       action() {
         ctx.clearRect(0,0,canvas.width,canvas.height);
         let video = createVideo(this.srcMP4, this.srcOGG, this.id);
+        video.controls = true;
         video.muted = true;
         video.play();
         showVideoOnCanvas(this, video);
