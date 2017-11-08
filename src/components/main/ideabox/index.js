@@ -386,6 +386,7 @@ class IdeaboxContainer extends React.Component {
       action() {
         ctx.clearRect(0,0,canvas.width,canvas.height);
         let video = createVideo(this.srcMP4, this.srcOGG, this.id);
+        video.muted = true;
         video.play();
         showVideoOnCanvas(this, video);
       }
