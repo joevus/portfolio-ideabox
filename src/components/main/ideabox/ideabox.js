@@ -134,10 +134,14 @@ class Ideabox extends React.Component {
 
   render() {
     return(
-        <div className="cntr-on-small-plus main-top">
+        <div className="cntr-on-small-plus ideabox-section">
           <div id="intro-frame" onClick={this.props.handleIntroClick} className="intro-frame">
+            <h1>Idea Box</h1>
+            <button className="styled-button"><i className="fa fa-pencil"></i> start drawing!</button>
+            <div className="vid-container">
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/Ds2V-qevAZ0" frameBorder="0" allowFullScreen></iframe>
+            </div>
 
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/Ds2V-qevAZ0" frameborder="0" allowfullscreen></iframe>
 
           </div>
           <div className="canvas-and-toolbar-cont">
