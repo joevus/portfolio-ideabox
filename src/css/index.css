@@ -55,6 +55,31 @@ p {
   border: 0;
 }
 
+.container {
+  display: grid;
+  justify-content: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+@media (min-width: 768px){
+  .container{
+    grid-template-columns: 740px;
+  }
+}
+
+@media (min-width: 992px){
+  .container{
+    grid-template-columns: 920px;
+  }
+}
+
+.row {
+  padding-left: 10px;
+  padding-right: 10px;
+
+}
+
 .navbar {
   color: white;
   background: #559999;
