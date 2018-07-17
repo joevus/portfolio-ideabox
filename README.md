@@ -1,3 +1,11 @@
-This is a portfolio site for Joe Hoskisson. Take a look at what I do.
+This is a portfolio site for Joe Hoskisson. It's in progress.
+
+Right now, main feature is a tool to draw frames of animates with HTML Canvas and play them back.
+
+Built with React.
+
+
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
