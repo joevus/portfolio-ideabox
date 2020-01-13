@@ -84,8 +84,8 @@ p {
 
 .navbar {
   color: white;
-  background: #559999;
-  border-bottom: solid #446666 3px;
+  background: #446666;
+  /* border-bottom: solid #446666 3px; */
 }
 .navbar a {
   padding-left: 20px;
@@ -186,6 +186,13 @@ section.header {
 section.experience {
   color: white;
   background: #559999;
+}
+
+.experience .coverletter {
+  padding: 70px 80px;
+  background: white;
+  color: black;
+  border-radius: 20px;
 }
 
 
