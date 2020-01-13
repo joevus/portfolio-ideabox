@@ -80,6 +80,8 @@ p {
 
 }
 
+/* Navbar */
+
 .navbar {
   color: white;
   background: #559999;
@@ -169,6 +171,21 @@ p {
   .navbar-toggle {
     display: none;
   }
+}
+
+/* Header */
+
+section.header {
+  min-height: 525px;
+  color: white;
+  background: #559999;
+}
+
+/* Experience */
+
+section.experience {
+  color: white;
+  background: #559999;
 }
 
 
@@ -266,4 +283,12 @@ with its grid intact but not with justify-items:center on it*/
 }
 .ideaBoxHd {
   text-align: center;
+}
+
+
+/* Contact (Footer) */
+
+section.contact {
+  color: white;
+  background: #446666;
 }
