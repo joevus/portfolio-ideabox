@@ -190,6 +190,15 @@ section.work .work_grid {
   padding: 15px;
 }
 
+section.work .work_entry {
+  /* background: #fcfaf2; */
+  /* background: #eeeef5; */
+  background: #fcfbf5;
+  border-radius: 8px;
+  border: solid lightgray 1px;
+  padding: 15px;
+}
+
 /* for small and larger screens */
 @media (min-width: 768px){
   section.work .work_grid {
@@ -198,11 +207,10 @@ section.work .work_grid {
     column-gap: 20px;
     row-gap: 20px;
   }
-}
 
-section.work .work_entry {
-  background: lightgray;
-  border-radius: 10px;
+  section.work .work_entry {
+    box-shadow: 7px 9px 12px rgba(120,120,125, 1);
+  }
 }
 
 /* Experience */
