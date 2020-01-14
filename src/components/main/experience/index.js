@@ -3,7 +3,7 @@ import React from "react";
 class Experience extends React.Component {
   render() {
     return (
-      <section className="experience container">
+      <section id="experience" className="container">
         <div className="row">
           <h1>Work Experience</h1>
         </div>

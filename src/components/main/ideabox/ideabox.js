@@ -130,7 +130,7 @@ class Ideabox extends React.Component {
 
   render() {
     return(
-        <div className="cntr-on-small-plus ideabox-section">
+        <section id="ideabox" className="cntr-on-small-plus">
           <div className="canvas-and-toolbar-cont">
             <div id="canvas-container">
               <canvas ref="canvas" id="ideaCanv" width={this.state.canvasWidth + "px"}
@@ -144,7 +144,7 @@ class Ideabox extends React.Component {
             </div>
           </div>
 
-        </div>
+        </section>
     );
   }
 }

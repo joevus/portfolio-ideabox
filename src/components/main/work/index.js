@@ -3,7 +3,7 @@ import React from "react";
 class Work extends React.Component {
   render() {
     return (
-      <section className="work container">
+      <section id="work" className="container">
         <div className="row">
           <h1>See Work <i className="fa fa-chevron-down"></i></h1>
         </div>

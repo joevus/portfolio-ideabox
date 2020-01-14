@@ -175,22 +175,22 @@ p {
 
 /* Header */
 
-section.header {
+section#header {
   min-height: 525px;
   color: white;
   background: #559999;
 }
 
 /* Work */
-section.work h1 {
+section#work h1 {
   text-align: center;
 }
 
-section.work .work_grid {
+section#work .work_grid {
   padding: 15px;
 }
 
-section.work .work_entry {
+section#work .work_entry {
   /* background: #fcfaf2; */
   /* background: #eeeef5; */
   background: #fcfbf5;
@@ -201,26 +201,26 @@ section.work .work_entry {
 
 /* for small and larger screens */
 @media (min-width: 768px){
-  section.work .work_grid {
+  section#work .work_grid {
     display: grid;
     grid-template-columns: 50% 50%;
     column-gap: 20px;
     row-gap: 20px;
   }
 
-  section.work .work_entry {
+  section#work .work_entry {
     box-shadow: 7px 9px 12px rgba(120,120,125, 1);
   }
 }
 
 /* Experience */
 
-section.experience {
+section#experience {
   color: white;
   background: #559999;
 }
 
-.experience .coverletter {
+section#experience .coverletter {
   padding: 70px 80px;
   background: white;
   color: black;
@@ -236,7 +236,7 @@ it using flex or grid and then have its child be the canvas-and-toolbar-cont
 with its grid intact but not with justify-items:center on it*/
 
 
-.ideabox-section {
+section#ideabox {
   position: relative;
   padding-bottom: 100px;
 }
@@ -327,7 +327,7 @@ with its grid intact but not with justify-items:center on it*/
 
 /* Contact (Footer) */
 
-section.contact {
+section#contact {
   color: white;
   background: #446666;
 }
