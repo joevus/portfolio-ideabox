@@ -187,11 +187,17 @@ section.work h1 {
 }
 
 section.work .work_grid {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  column-gap: 20px;
-  row-gap: 20px;
   padding: 15px;
+}
+
+/* for small and larger screens */
+@media (min-width: 768px){
+  section.work .work_grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    column-gap: 20px;
+    row-gap: 20px;
+  }
 }
 
 section.work .work_entry {

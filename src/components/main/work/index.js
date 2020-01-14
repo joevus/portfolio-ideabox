@@ -9,7 +9,7 @@ class Work extends React.Component {
         </div>
         <div className="row work_grid">
             <div className="work_entry">
-                <p>hi</p>
+                <p>hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi hi </p>
                 <p>hi</p>
             </div>
             <div className="work_entry">
