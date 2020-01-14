@@ -181,6 +181,24 @@ section.header {
   background: #559999;
 }
 
+/* Work */
+section.work h1 {
+  text-align: center;
+}
+
+section.work .work_grid {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  column-gap: 20px;
+  row-gap: 20px;
+  padding: 15px;
+}
+
+section.work .work_entry {
+  background: lightgray;
+  border-radius: 10px;
+}
+
 /* Experience */
 
 section.experience {
