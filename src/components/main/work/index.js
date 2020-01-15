@@ -33,7 +33,7 @@ class Work extends React.Component {
                 <h2>FitRunr</h2>
                 <p>FitRunr was a new brand for Sotrackit who I worked for. I built a website, store, and forum for it as the sole only developer on the project.</p>
                 <ul>
-                  <li>Well-designed website with full full-width video playing in background behind navbar and header of the home page. </li>
+                  <li>Well-designed website with full-width video (mobile and desktop) playing in background behind navbar and header of the home page. </li>
                   <li>Built with React, in case needed to extend features and to practice React.</li>
                   <li>Attached Shopify store, and WordPress site with members-only content</li>
                   <li>Set up Ngnix on a Ubuntu VPS. </li>
