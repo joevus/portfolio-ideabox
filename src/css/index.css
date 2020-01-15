@@ -208,7 +208,8 @@ section#work h1 {
 }
 
 section#work .work_grid {
-  padding: 15px;
+  margin: 120px 60px;
+  padding: 0;
 }
 
 section#work .work_entry {
@@ -218,6 +219,7 @@ section#work .work_entry {
   border-radius: 8px;
   border: solid lightgray 1px;
   padding: 15px;
+  margin-bottom: 20px;
 }
 
 /* for small and larger screens */
