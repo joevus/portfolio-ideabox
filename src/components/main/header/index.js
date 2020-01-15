@@ -6,8 +6,10 @@ class Header extends React.Component {
       <section id="header" className="container">
         <div className="row">
           <h1>Hello, I'm Joe</h1>
-          <p>Glad you visited. I help people put their ideas on the web.</p>
-          <p>That's the Idea Box, just below. It animates what you draw to get your creativity going. Beyond that you'll find some of my other work.</p>
+          <h2>Fullstack web developer, emphasis on Ruby and NodeJS.</h2>
+          <h2>I have an interest in doing good, building bridges between cultures, entrepreneurship, and literature.</h2>
+          <p className="languages"><span>Hablo español</span><span className="arabic">و احكي عربي</span></p>
+          {/* <p className="arabic">و احكي عربي</p> */}
         </div>
 
       </section>
