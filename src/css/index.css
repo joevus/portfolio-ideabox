@@ -267,7 +267,7 @@ it using flex or grid and then have its child be the canvas-and-toolbar-cont
 with its grid intact but not with justify-items:center on it*/
 
 
-section#ideabox {
+div#ideabox {
   position: relative;
   padding-bottom: 100px;
 }

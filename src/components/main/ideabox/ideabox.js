@@ -130,7 +130,14 @@ class Ideabox extends React.Component {
 
   render() {
     return(
-        <section id="ideabox" className="cntr-on-small-plus">
+      <section id="ideabox" className="container">
+        <h1>Idea Box</h1>
+        <p>Just for fun, you can draw in this box and make your own animation.</p>
+        <p><span>Step 1:</span> draw something in the box by pressing down and moving the mouse (or your finger).</p>
+        <p><span>Step 2:</span> Press the <i className="fa fa-plus"></i> button to add the frame. A shadow of the frame will remain behind for reference.</p>
+        <p><span>Step 3:</span> Repeat this a few times.</p>
+        <p><span>Step 4:</span> Press the <i className="fa fa-play"></i> button to see your animation. Continue drawing when it's over.</p>
+        <div className="cntr-on-small-plus">
           <div className="canvas-and-toolbar-cont">
             <div id="canvas-container">
               <canvas ref="canvas" id="ideaCanv" width={this.state.canvasWidth + "px"}
@@ -143,8 +150,8 @@ class Ideabox extends React.Component {
               <button onClick={this.props.handlePlay}><i className="fa fa-play"></i></button>
             </div>
           </div>
-
-        </section>
+        </div>
+      </section>
     );
   }
 }
