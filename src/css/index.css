@@ -222,6 +222,14 @@ section#work .work_entry {
   margin-bottom: 20px;
 }
 
+section#work .work_entry img {
+  width: 100%;
+}
+
+section#work .work_entry img.black_background {
+  background: black;
+}
+
 /* for small and larger screens */
 @media (min-width: 768px){
   section#work .work_grid {
