@@ -20,9 +20,13 @@ class IdeaboxContainer extends React.Component {
   }
 
   handleKeyDown = (e) => {
-    console.log("e.key: ", e.key);
+    // allow shift to add frames, space to play frames
     if(e.key === "Shift") {
-      console.log("you pressed shift, you rascal");
+      this.handlePlus(e);
+    } else if (e.code === "Space") {
+      this.handlePlay(e);
+      // prevent default spacebar action
+      e.preventDefault();
     }
   }
 
@@ -177,18 +181,13 @@ class IdeaboxContainer extends React.Component {
 
   }
 
-  handleLoad = () => {
-    // run things that need to run when component loads
-  }
-
   componentDidMount = () => {
-    this.handleLoad();
-    // this.ctx = this.props.context;
+    document.addEventListener("keydown", this.handleKeyDown);
   }
 
   render() {
     return (
-      <Ideabox handleClick={this.handleClick} handleKeyDown={this.handleKeyDown} handleMouseDown={this.handleMouseDown} handleMouseUp={this.handleMouseUp} handleMouseMove={this.handleMouseMove}
+      <Ideabox handleClick={this.handleClick} handleMouseDown={this.handleMouseDown} handleMouseUp={this.handleMouseUp} handleMouseMove={this.handleMouseMove}
       handlePlus={this.handlePlus} handlePlay={this.handlePlay}
       handleLoad={this.handleLoad} handleIntroClick={this.handleIntroClick}
       handleTouchStart={this.handleTouchStart}

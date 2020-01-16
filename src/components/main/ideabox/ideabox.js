@@ -134,14 +134,14 @@ class Ideabox extends React.Component {
         <h1>Idea Box</h1>
         <p>Just for fun, you can draw in this box and make your own animation.</p>
         <p><span>Step 1:</span> draw something in the box by pressing down and moving the mouse (or your finger).</p>
-        <p><span>Step 2:</span> Press the <i className="fa fa-plus"></i> button to add the frame. A shadow of the frame will remain behind for reference.</p>
+        <p><span>Step 2:</span> Press the <i className="fa fa-plus"></i> button or shift key to add the frame. A shadow of the frame will remain behind for reference.</p>
         <p><span>Step 3:</span> Repeat this a few times.</p>
-        <p><span>Step 4:</span> Press the <i className="fa fa-play"></i> button to see your animation.</p>
+        <p><span>Step 4:</span> Press the <i className="fa fa-play"></i> button or spacebar to see your animation.</p>
         <div className="cntr-on-small-plus">
           <div className="canvas-and-toolbar-cont">
             <div id="canvas-container">
               <canvas ref="canvas" id="ideaCanv" width={this.state.canvasWidth + "px"}
-              height={this.state.canvasHeight + "px"} onClick={this.props.handleClick} onKeyDown={this.props.handleKeyDown} onMouseDown={this.props.handleMouseDown} onMouseUp={this.props.handleMouseUp} onMouseMove={this.props.handleMouseMove} onTouchStart={this.props.handleTouchStart}
+              height={this.state.canvasHeight + "px"} onClick={this.props.handleClick} onMouseDown={this.props.handleMouseDown} onMouseUp={this.props.handleMouseUp} onMouseMove={this.props.handleMouseMove} onTouchStart={this.props.handleTouchStart}
               onTouchMove={this.props.handleTouchMove}></canvas>
             </div>
 
