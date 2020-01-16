@@ -136,7 +136,7 @@ class Ideabox extends React.Component {
         <p><span>Step 1:</span> draw something in the box by pressing down and moving the mouse (or your finger).</p>
         <p><span>Step 2:</span> Press the <i className="fa fa-plus"></i> button to add the frame. A shadow of the frame will remain behind for reference.</p>
         <p><span>Step 3:</span> Repeat this a few times.</p>
-        <p><span>Step 4:</span> Press the <i className="fa fa-play"></i> button to see your animation. Continue drawing when it's over.</p>
+        <p><span>Step 4:</span> Press the <i className="fa fa-play"></i> button to see your animation.</p>
         <div className="cntr-on-small-plus">
           <div className="canvas-and-toolbar-cont">
             <div id="canvas-container">
@@ -151,6 +151,7 @@ class Ideabox extends React.Component {
             </div>
           </div>
         </div>
+        <p>You can see the code for this "idea box" and the rest of this portfolio page <a href="https://github.com/joevus/portfolio-ideabox">on Github</a>. The site is built with React. The "idea box" uses HTML5 Canvas.</p>
       </section>
     );
   }
