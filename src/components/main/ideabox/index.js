@@ -96,8 +96,10 @@ class IdeaboxContainer extends React.Component {
         setTimeout(putLastShadowSketch, 1000);
       }
     }
-    let playId = setInterval(showFrame, 200);
+    // do not play if there are no sketches
+    if(this.state.sketches.length === 0) { return; }
 
+    let playId = setInterval(showFrame, 200);
   }
 
   handleMouseDown = (e) => {
