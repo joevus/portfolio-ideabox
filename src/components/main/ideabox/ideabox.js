@@ -151,7 +151,7 @@ class Ideabox extends React.Component {
             </div>
           </div>
         </div>
-        <p>You can see the code for this "idea box" and the rest of this portfolio page <a href="https://github.com/joevus/portfolio-ideabox">on Github</a>. The site is built with React. The "idea box" uses HTML5 Canvas.</p>
+        <p>You can see the code for this <a href="https://github.com/joevus/portfolio-ideabox/tree/master/src/components/main/ideabox">idea box</a> and the rest of this <a href="https://github.com/joevus/portfolio-ideabox">portfolio page on Github</a>. The site is built with React. The idea box uses HTML5 Canvas.</p>
       </section>
     );
   }
