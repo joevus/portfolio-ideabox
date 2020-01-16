@@ -2,7 +2,6 @@ import React from "react";
 
 import Ideabox from "./ideabox.js";
 import { connect } from "react-redux";
-import { click } from "../../../actions";
 
 class IdeaboxContainer extends React.Component {
 
@@ -12,11 +11,6 @@ class IdeaboxContainer extends React.Component {
       sketches: [],
       shadowSketches: []
     }
-    // to track whether intro has been clicked
-    this.introClicked = false;
-  }
-
-  handleClick = (e) => {
   }
 
   handleKeyDown = (e) => {
@@ -161,39 +155,19 @@ class IdeaboxContainer extends React.Component {
     this.ctx.fill();
   }
 
-  handleIntroClick = () => {
-    // For first click on canvas, if clicked anywhere besides "skip intro",
-    // run introShow. Otherwise, skip intro.
-
-    const introFrame = document.getElementById("intro-frame");
-    let opac = window.getComputedStyle(introFrame).getPropertyValue("opacity");
-    let fadeId = setInterval(function(){
-      opac -= .1;
-
-      introFrame.style.opacity = opac;
-
-      if(opac <= 0) {
-        introFrame.style.display = "none";
-        clearInterval(fadeId);
-      }
-      // console.log("run fade");
-    }, 80);
-
-  }
-
   componentDidMount = () => {
     document.addEventListener("keydown", this.handleKeyDown);
   }
 
   render() {
     return (
-      <Ideabox handleClick={this.handleClick} handleMouseDown={this.handleMouseDown} handleMouseUp={this.handleMouseUp} handleMouseMove={this.handleMouseMove}
+      <Ideabox handleMouseDown={this.handleMouseDown} handleMouseUp={this.handleMouseUp} handleMouseMove={this.handleMouseMove}
       handlePlus={this.handlePlus} handlePlay={this.handlePlay}
-      handleLoad={this.handleLoad} handleIntroClick={this.handleIntroClick}
+      handleLoad={this.handleLoad}
       handleTouchStart={this.handleTouchStart}
       handleTouchMove={this.handleTouchMove} />
     );
   }
 }
 
-export default connect(state => state, {click})(IdeaboxContainer);
+export default connect(state => state, null)(IdeaboxContainer);
