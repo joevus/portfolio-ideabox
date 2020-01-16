@@ -19,6 +19,13 @@ class IdeaboxContainer extends React.Component {
   handleClick = (e) => {
   }
 
+  handleKeyDown = (e) => {
+    console.log("e.key: ", e.key);
+    if(e.key === "Shift") {
+      console.log("you pressed shift, you rascal");
+    }
+  }
+
   handlePlus = (e) => {
     let canvas = document.getElementById("ideaCanv");
     let ctx = this.props.context;
@@ -179,7 +186,7 @@ class IdeaboxContainer extends React.Component {
 
   render() {
     return (
-      <Ideabox handleClick={this.handleClick} handleMouseDown={this.handleMouseDown} handleMouseUp={this.handleMouseUp} handleMouseMove={this.handleMouseMove}
+      <Ideabox handleClick={this.handleClick} handleKeyDown={this.handleKeyDown} handleMouseDown={this.handleMouseDown} handleMouseUp={this.handleMouseUp} handleMouseMove={this.handleMouseMove}
       handlePlus={this.handlePlus} handlePlay={this.handlePlay}
       handleLoad={this.handleLoad} handleIntroClick={this.handleIntroClick}
       handleTouchStart={this.handleTouchStart}
