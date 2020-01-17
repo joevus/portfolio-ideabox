@@ -131,12 +131,17 @@ class Ideabox extends React.Component {
   render() {
     return(
       <section id="ideabox">
-        <h1>Idea Box</h1>
-        <p>Just for fun, you can draw in this box and make your own animation.</p>
-        <p><span>Step 1:</span> draw something in the box by pressing down and moving the mouse (or your finger).</p>
-        <p><span>Step 2:</span> Press the <i className="fa fa-plus"></i> button or shift key to add the frame. A shadow of the frame will remain behind for reference.</p>
-        <p><span>Step 3:</span> Repeat this a few times.</p>
-        <p><span>Step 4:</span> Press the <i className="fa fa-play"></i> button or spacebar to see your animation.</p>
+        <div className="container">
+          <div className="row">
+            <h1>Idea Box</h1>
+            <p>Just for fun, you can draw in this box and make your own animation.</p>
+            <p><span>Step 1:</span> draw something in the box by pressing down and moving the mouse (or your finger).</p>
+            <p><span>Step 2:</span> Press the <i className="fa fa-plus"></i> button or shift key to add the frame. A shadow of the frame will remain behind for reference.</p>
+            <p><span>Step 3:</span> Repeat this a few times.</p>
+            <p><span>Step 4:</span> Press the <i className="fa fa-play"></i> button or spacebar to see your animation.</p>
+          </div>
+        </div>
+
         <div className="cntr-on-small-plus">
           <div className="canvas-and-toolbar-cont">
             <div id="canvas-container">
@@ -151,7 +156,11 @@ class Ideabox extends React.Component {
             </div>
           </div>
         </div>
-        <p>You can see the code for this <a href="https://github.com/joevus/portfolio-ideabox/tree/master/src/components/main/ideabox">idea box</a> and the rest of this <a href="https://github.com/joevus/portfolio-ideabox">portfolio page on Github</a>. The site is built with React. The idea box uses HTML5 Canvas.</p>
+        <div className="container">
+          <div className="row">
+            <p>You can see the code for this <a href="https://github.com/joevus/portfolio-ideabox/tree/master/src/components/main/ideabox">idea box</a> and the rest of this <a href="https://github.com/joevus/portfolio-ideabox">portfolio page on Github</a>. The site is built with React. The idea box uses HTML5 Canvas.</p>
+          </div>
+        </div>
       </section>
     );
   }

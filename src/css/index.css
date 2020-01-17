@@ -274,7 +274,7 @@ div#ideabox {
 
 /*for mobile screens*/
 .canvas-and-toolbar-cont{
-  padding-top: 100px;
+  padding-top: 50px;
   /*display: grid;
   grid-template-columns: 80% 20%;*/
   /*when made main-top position: relative, it messed with the offsetLeft and
