@@ -130,7 +130,7 @@ class Ideabox extends React.Component {
 
   render() {
     return(
-      <section id="ideabox" className="container">
+      <section id="ideabox">
         <h1>Idea Box</h1>
         <p>Just for fun, you can draw in this box and make your own animation.</p>
         <p><span>Step 1:</span> draw something in the box by pressing down and moving the mouse (or your finger).</p>
