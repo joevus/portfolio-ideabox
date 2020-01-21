@@ -5,7 +5,7 @@ class Experience extends React.Component {
     return (
       <section id="experience" className="container">
         <div className="row">
-          <h1>Work Experience</h1>
+          <h1>Work Summary</h1>
         </div>
         <div className="row coverletter">
           <p>

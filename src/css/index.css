@@ -251,6 +251,10 @@ section#experience {
   background: #559999;
 }
 
+section#experience h1 {
+  text-align: center;
+}
+
 section#experience .coverletter {
   padding: 70px 80px;
   background: white;
@@ -361,4 +365,22 @@ div#ideabox {
 section#contact {
   color: white;
   background: #446666;
+}
+
+section#contact a {
+  color: white;
+}
+
+section#contact p.see_more {
+  margin-top: 40px;
+}
+
+section#contact p.see_more a {
+  padding-left: 10px;
+  text-decoration: none;
+}
+
+section#contact p.see_more img {
+  height: 1.5em;
+  vertical-align: bottom;
 }

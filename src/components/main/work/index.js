@@ -10,7 +10,7 @@ class Work extends React.Component {
     return (
       <section id="work" className="container">
         <div className="row">
-          <h1>See Work <i className="fa fa-chevron-down"></i></h1>
+          <h1>Featured Projects <i className="fa fa-chevron-down"></i></h1>
         </div>
         <div className="row work_grid">
             <div className="work_entry">
