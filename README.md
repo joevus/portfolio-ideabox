@@ -4,6 +4,8 @@ Right now, main feature is a tool to draw frames of animates with HTML Canvas an
 
 Built with React.
 
+`npm start` to run
+
 
 
 
