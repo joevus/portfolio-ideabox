@@ -146,6 +146,7 @@ class IdeaboxContainer extends React.Component {
 
   handleTouchMove = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     var X = e.touches[0].pageX - e.target.offsetLeft;
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     var Y = e.touches[0].pageY - e.target.getBoundingClientRect().top - scrollTop;
